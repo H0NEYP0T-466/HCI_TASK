@@ -196,6 +196,68 @@ body {
     color: white;
 }
 
+/* Education Section */
+.education-section {
+    max-width: 900px;
+    width: 100%;
+}
+
+.education-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+.education-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.education-card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid #f0f0f0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 4px solid #007bff;
+}
+
+.education-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.education-card h4 {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.education-card .institution {
+    color: #007bff;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.education-card .marks {
+    color: #28a745;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.education-card .year {
+    color: #666;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .nav-list {
@@ -241,6 +303,10 @@ body {
     .projects-grid {
         grid-template-columns: 1fr;
     }
+    
+    .education-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 480px) {
@@ -272,6 +338,10 @@ body {
     }
     
     .project-card {
+        padding: 1.5rem;
+    }
+    
+    .education-card {
         padding: 1.5rem;
     }
 }
