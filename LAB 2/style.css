@@ -1,0 +1,134 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+#raleway-uniquifier 
+{
+  font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  max-width: 500px;
+  padding-bottom: 10rem;
+}
+#raleway-uniquifier p {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+  color: #9c9c9c;
+}
+body {
+  font-family: Arial, sans-serif;
+  background: #000;      
+  color: #fff;
+}
+
+.navbar {
+  background: #111;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem 8%;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  border-radius: 10px;
+
+}
+.navbar a {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+  color: #9c9c9c;
+  text-decoration: none;
+  margin: 0 1rem;
+  font-size: 0.95rem;
+}
+.navbar a:hover {
+  color: #fff;
+}
+.nav-socials img {
+  width: 20px;
+  height: 20px;
+  margin-left: 1rem;
+}
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4rem 8%;
+  gap: 2rem;
+}
+
+#raleway-uniquifier h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.hero-text p {
+  color: #aaa;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+.btn-primary {
+   font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+  display: inline-block;
+  background: #29a30d;
+  color: #fff;
+  padding: 0.9rem 2rem;
+  margin-top: 2rem;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 0 12px #29a30d;
+}
+.btn-primary:hover {
+  background: #34c91b;
+}
+
+.worked-with {
+    width: 100%;
+    margin-top: 3rem;
+  margin-top: 3rem;
+}
+.worked-with p {
+    font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  color: #ccc;
+}
+.logos {
+    font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+  display: flex;
+  gap: 1rem;
+}
+.logo-box {
+    height: 50px;
+  border: 1px solid #333;
+  padding: 0.8rem 1.2rem;
+  border-radius: 6px;
+  color: #666;
+  min-width: 190px;
+  text-align: center;
+  font-weight: 500;
+}
+#img
+{
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.hero-image {
+    margin-right: 6rem;
+ margin-bottom: 20rem;
+}
