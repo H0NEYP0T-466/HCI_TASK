@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student Grade Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">
+        <svg viewBox="0 0 48 48" width="28" height="28" role="img">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#8A2BE2" />
+              <stop offset="100%" stop-color="#00D4FF" />
+            </linearGradient>
+          </defs>
+          <circle cx="24" cy="24" r="20" fill="url(#g1)" />
+          <text x="24" y="29" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="16" fill="white" font-weight="800">SG</text>
+        </svg>
+      </span>
+      <h1>Student Grade Calculator</h1>
+    </div>
+
+    <button class="theme-toggle" id="themeToggle" aria-pressed="false" aria-label="Toggle theme">
+      <span class="toggle-track" aria-hidden="true">
+        <span class="toggle-thumb"></span>
+      </span>
+      <span class="toggle-label">
+        <svg class="icon sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.76 4.84l-1.8-1.79L3.17 4.84l1.79 1.79 1.8-1.79zm10.48 0l1.79-1.79 1.79 1.79-1.79 1.79-1.79-1.79zM12 4V1h-0v3h0zm0 19v-3h0v3h0zM4 12H1v0h3v0zm19 0h-3v0h3v0zM6.76 19.16l-1.8 1.79-1.79-1.79 1.79-1.79 1.8 1.79zm12.48 0l1.79 1.79-1.79 1.79-1.79-1.79 1.79-1.79zM12 8a4 4 0 100 8 4 4 0 000-8z" fill="currentColor"/></svg>
+        <svg class="icon moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.74 2.01a1 1 0 01.94 1.35A8.01 8.01 0 0020 12a8 8 0 11-9.36-7.92 1 1 0 01.1-2.07z" fill="currentColor"/></svg>
+      </span>
+    </button>
+  </header>
+
+  <main class="container">
+    <section class="panel form-panel" aria-labelledby="formTitle">
+      <h2 id="formTitle" class="visually-hidden">Enter student details</h2>
+
+      <form id="studentForm" novalidate>
+        <div class="input-grid">
+          <div class="field">
+            <input type="text" id="name" name="name" autocomplete="name" required />
+            <label for="name">Full Name</label>
+            <p class="field-hint">Enter the student's full name.</p>
+            <p class="field-error" id="nameError" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <input type="text" id="rollNumber" name="rollNumber" autocomplete="off" required />
+            <label for="rollNumber">Roll Number</label>
+            <p class="field-hint">Alphanumeric or numeric allowed.</p>
+            <p class="field-error" id="rollError" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <input type="number" id="marks" name="marks" min="0" max="100" inputmode="numeric" required />
+            <label for="marks">Marks (0-100)</label>
+            <p class="field-hint">Only values from 0 to 100.</p>
+            <p class="field-error" id="marksError" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn btn-primary" id="submitBtn">
+            <span class="btn-content">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z" fill="currentColor"/></svg>
+              Add Result
+            </span>
+          </button>
+
+          <button type="button" class="btn btn-ghost" id="clearAllBtn" disabled>
+            <span class="btn-content">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v2H3V6zm2 4h14l-1.5 10.5a2 2 0 01-2 1.5H8.5a2 2 0 01-2-1.5L5 10zM9 4h6v2H9V4z" fill="currentColor"/></svg>
+              Clear All
+            </span>
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel results-panel" aria-labelledby="resultsTitle">
+      <div class="results-header">
+        <h2 id="resultsTitle">Results</h2>
+        <p class="results-subtitle" id="resultsCount">No results yet</p>
+      </div>
+
+      <div id="emptyState" class="empty-state" aria-hidden="false">
+        <div class="empty-art" aria-hidden="true">
+          <div class="orb orb-1"></div>
+          <div class="orb orb-2"></div>
+          <div class="orb orb-3"></div>
+        </div>
+        <p>Add a student to see their grade, progress ring, and a detailed card here.</p>
+      </div>
+
+      <div id="results" class="results"></div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
