@@ -26,7 +26,6 @@
       </span>
       <h1>Student Grade Calculator</h1>
     </div>
-
     <button class="theme-toggle" id="themeToggle" aria-pressed="false" aria-label="Toggle theme">
       <span class="toggle-track" aria-hidden="true">
         <span class="toggle-thumb"></span>
@@ -37,11 +36,9 @@
       </span>
     </button>
   </header>
-
   <main class="container">
     <section class="panel form-panel" aria-labelledby="formTitle">
       <h2 id="formTitle" class="visually-hidden">Enter student details</h2>
-
       <form id="studentForm" novalidate>
         <div class="input-grid">
           <div class="field">
@@ -50,14 +47,12 @@
             <p class="field-hint">Enter the student's full name.</p>
             <p class="field-error" id="nameError" aria-live="polite"></p>
           </div>
-
           <div class="field">
-            <input type="text" id="rollNumber" name="rollNumber" autocomplete="off" required />
-            <label for="rollNumber">Roll Number</label>
+            <input type="text" id="age" name="age" autocomplete="off" required />
+            <label for="age">Age</label>
             <p class="field-hint">Alphanumeric or numeric allowed.</p>
-            <p class="field-error" id="rollError" aria-live="polite"></p>
+            <p class="field-error" id="ageError" aria-live="polite"></p>
           </div>
-
           <div class="field">
             <input type="number" id="marks" name="marks" min="0" max="100" inputmode="numeric" required />
             <label for="marks">Marks (0-100)</label>
@@ -65,7 +60,6 @@
             <p class="field-error" id="marksError" aria-live="polite"></p>
           </div>
         </div>
-
         <div class="actions">
           <button type="submit" class="btn btn-primary" id="submitBtn">
             <span class="btn-content">
@@ -73,7 +67,6 @@
               Add Result
             </span>
           </button>
-
           <button type="button" class="btn btn-ghost" id="clearAllBtn" disabled>
             <span class="btn-content">
               <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v2H3V6zm2 4h14l-1.5 10.5a2 2 0 01-2 1.5H8.5a2 2 0 01-2-1.5L5 10zM9 4h6v2H9V4z" fill="currentColor"/></svg>
@@ -83,13 +76,11 @@
         </div>
       </form>
     </section>
-
     <section class="panel results-panel" aria-labelledby="resultsTitle">
       <div class="results-header">
         <h2 id="resultsTitle">Results</h2>
         <p class="results-subtitle" id="resultsCount">No results yet</p>
       </div>
-
       <div id="emptyState" class="empty-state" aria-hidden="false">
         <div class="empty-art" aria-hidden="true">
           <div class="orb orb-1"></div>
@@ -98,13 +89,10 @@
         </div>
         <p>Add a student to see their grade, progress ring, and a detailed card here.</p>
       </div>
-
       <div id="results" class="results"></div>
     </section>
   </main>
-
   <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
-
   <script src="script.js"></script>
 </body>
 </html>

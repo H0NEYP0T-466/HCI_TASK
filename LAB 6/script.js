@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const toast = $('#toast');
   const themeToggle = $('#themeToggle');
 
-  // Theme
   const savedTheme = localStorage.getItem('sgc-theme');
   if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
   updateToggleAria();
@@ -28,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     themeToggle.setAttribute('aria-pressed', String(isLight));
   }
 
-  // Ripple micro-interaction
   function makeRipple(e, target) {
     const rect = target.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -46,13 +44,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Validation and helpers
   const nameInput = $('#name');
-  const rollInput = $('#rollNumber');
+  const ageInput = $('#age');
   const marksInput = $('#marks');
 
   function setError(el, msg) {
-    const err = (el.id === 'name') ? $('#nameError') : (el.id === 'rollNumber') ? $('#rollError') : $('#marksError');
+    const err = (el.id === 'name') ? $('#nameError') : (el.id === 'age') ? $('#ageError') : $('#marksError');
     err.textContent = msg || '';
     el.setAttribute('aria-invalid', msg ? 'true' : 'false');
   }
@@ -60,20 +57,17 @@ document.addEventListener('DOMContentLoaded', () => {
   function validate() {
     let ok = true;
     const name = nameInput.value.trim();
-    const roll = rollInput.value.trim();
+    const age = ageInput.value.trim();
     const marksVal = marksInput.value.trim();
 
-    // Name
     if (!name) { setError(nameInput, 'Name is required.'); ok = false; }
     else if (name.length < 2) { setError(nameInput, 'Name is too short.'); ok = false; }
     else { setError(nameInput, ''); }
 
-    // Roll
-    if (!roll) { setError(rollInput, 'Roll number is required.'); ok = false; }
-    else if (!/^[a-z0-9\-_.]+$/i.test(roll)) { setError(rollInput, 'Only letters, numbers, "-", "_" and "."'); ok = false; }
-    else { setError(rollInput, ''); }
+    if (!age) { setError(ageInput, 'Age is required.'); ok = false; }
+    else if (!/^[a-z0-9\-_.]+$/i.test(age)) { setError(ageInput, 'Only letters, numbers, "-", "_" and "."'); ok = false; }
+    else { setError(ageInput, ''); }
 
-    // Marks
     if (marksVal === '') { setError(marksInput, 'Marks are required.'); ok = false; }
     else {
       const m = Number(marksVal);
@@ -84,9 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
     return ok;
   }
 
-  [nameInput, rollInput, marksInput].forEach(el => {
+  [nameInput, ageInput, marksInput].forEach(el => {
     el.addEventListener('input', () => setError(el, ''));
-    // Enable floating label effect (placeholder-shown polyfill)
     el.setAttribute('placeholder', ' ');
   });
 
@@ -146,12 +139,11 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => wrap.remove(), 1600);
   }
 
-  function createCard({ name, roll, marks, grade, note, badge }) {
+  function createCard({ name, age, marks, grade, note, badge }) {
     const card = document.createElement('article');
     card.className = 'student-card';
     card.dataset.grade = grade;
 
-    // Accent backdrop
     const accent = document.createElement('div');
     accent.className = 'card-accent';
     card.appendChild(accent);
@@ -159,22 +151,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const row = document.createElement('div');
     row.className = 'card-row';
 
-    // Avatar
     const avatar = document.createElement('div');
     avatar.className = 'avatar';
     avatar.textContent = initialsFromName(name);
 
-    // Main
     const main = document.createElement('div');
     main.className = 'card-main';
     const h3 = document.createElement('h3');
     h3.textContent = name;
     const sub = document.createElement('p');
     sub.className = 'card-sub';
-    sub.textContent = `Roll: ${roll}`;
+    sub.textContent = `Age: ${age}`;
     main.append(h3, sub);
 
-    // Aside (ring)
     const aside = document.createElement('div');
     aside.className = 'card-aside';
     const ring = document.createElement('div');
@@ -185,7 +174,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     row.append(avatar, main, aside);
 
-    // Meta
     const meta = document.createElement('div');
     meta.className = 'meta';
     const marksEl = document.createElement('span');
@@ -195,7 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
     badgeEl.textContent = `${grade} • ${badge}`;
     meta.append(marksEl, badgeEl);
 
-    // Actions
     const actions = document.createElement('div');
     actions.className = 'card-actions';
 
@@ -213,7 +200,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     actions.append(celebrateBtn, deleteBtn);
 
-    // Note
     const noteEl = document.createElement('p');
     noteEl.className = 'card-sub';
     noteEl.style.marginTop = '4px';
@@ -221,7 +207,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     card.append(row, meta, noteEl, actions);
 
-    // Interactions
     celebrateBtn.addEventListener('click', () => {
       createConfetti(card);
     });
@@ -234,7 +219,6 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     });
 
-    // Auto celebrate for A / A+
     if (grade === 'A' || grade === 'A+') {
       setTimeout(() => createConfetti(card), 250);
     }
@@ -249,18 +233,17 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
     const name = nameInput.value.trim();
-    const roll = rollInput.value.trim();
+    const age = ageInput.value.trim();
     const marks = Number(marksInput.value.trim());
 
     const { grade, note, badge } = computeGrade(marks);
-    const card = createCard({ name, roll, marks, grade, note, badge });
+    const card = createCard({ name, age, marks, grade, note, badge });
     results.prepend(card);
     updateEmptyState();
     showToast(`Added ${name} • Grade ${grade}`);
 
     form.reset();
-    // keep floating-label state correct
-    [nameInput, rollInput, marksInput].forEach(el => el.blur());
+    [nameInput, ageInput, marksInput].forEach(el => el.blur());
   });
 
   clearAllBtn.addEventListener('click', () => {
