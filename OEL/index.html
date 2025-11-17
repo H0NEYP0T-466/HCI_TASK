@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form - Modern UI</title>
+    
+    <!-- Google Font: Space Grotesk - Modern and unique -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar with Toggle Button -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">FeedbackHub</div>
+            
+            <!-- Hamburger Toggle Button -->
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#feedback" class="nav-link">Feedback</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content: Feedback Form -->
+    <main class="main-content" id="feedback">
+        <div class="form-container">
+            <h1 class="form-title">Share Your Feedback</h1>
+            <p class="form-subtitle">We'd love to hear from you! Please fill out the form below.</p>
+            
+            <!-- Feedback Form -->
+            <form id="feedbackForm" class="feedback-form" novalidate>
+                <!-- Name Field -->
+                <div class="form-group">
+                    <input 
+                        type="text" 
+                        id="name" 
+                        class="form-input" 
+                        placeholder=" "
+                        required
+                    >
+                    <label for="name" class="form-label">Your Name</label>
+                    <span class="error-message" id="nameError"></span>
+                </div>
+
+                <!-- Email Field -->
+                <div class="form-group">
+                    <input 
+                        type="email" 
+                        id="email" 
+                        class="form-input" 
+                        placeholder=" "
+                        required
+                    >
+                    <label for="email" class="form-label">Email Address</label>
+                    <span class="error-message" id="emailError"></span>
+                </div>
+
+                <!-- Comments/Feedback Field -->
+                <div class="form-group">
+                    <textarea 
+                        id="comments" 
+                        class="form-input form-textarea" 
+                        placeholder=" "
+                        rows="5"
+                        required
+                    ></textarea>
+                    <label for="comments" class="form-label">Your Comments</label>
+                    <span class="error-message" id="commentsError"></span>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn">
+                    <span class="btn-text">Submit Feedback</span>
+                    <span class="btn-glow"></span>
+                </button>
+
+                <!-- Success Message -->
+                <div class="success-message" id="successMessage">
+                    ✓ Thank you! Your feedback has been submitted successfully.
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Link to external JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
