@@ -1,0 +1,538 @@
+/* ================================================
+   CSS Variables - High Contrast Color Scheme
+   Deep Navy + Bright Cyan + Neon Pink Accents
+   ================================================ */
+:root {
+    /* Color Palette */
+    --primary-dark: #0a0e27;
+    --primary-navy: #1a1f3a;
+    --primary-blue: #2a3454;
+    --accent-cyan: #00f5ff;
+    --accent-pink: #ff006e;
+    --accent-purple: #8338ec;
+    --success-green: #06ffa5;
+    --error-red: #ff3366;
+    --text-white: #ffffff;
+    --text-gray: #b8c1ec;
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    
+    /* Shadows */
+    --shadow-glow-cyan: 0 0 20px rgba(0, 245, 255, 0.4);
+    --shadow-glow-pink: 0 0 20px rgba(255, 0, 110, 0.4);
+    --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.5);
+    --shadow-hover: 0 15px 60px rgba(0, 245, 255, 0.3);
+}
+
+/* ================================================
+   Global Reset and Base Styles
+   ================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-navy) 100%);
+    color: var(--text-white);
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ================================================
+   Navigation Bar Styles
+   ================================================ */
+.navbar {
+    background: rgba(26, 31, 58, 0.95);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 2px solid var(--accent-cyan);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-white);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: transform 0.3s ease;
+}
+
+.nav-brand:hover {
+    transform: scale(1.05);
+}
+
+/* Hamburger Toggle Button */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: transparent;
+    border: 2px solid var(--accent-cyan);
+    padding: 0.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-toggle:hover {
+    background: var(--accent-cyan);
+    box-shadow: var(--shadow-glow-cyan);
+}
+
+.hamburger-line {
+    width: 25px;
+    height: 3px;
+    background: var(--accent-cyan);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.nav-toggle:hover .hamburger-line {
+    background: var(--primary-dark);
+}
+
+/* Navigation Menu */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: var(--spacing-md);
+}
+
+.nav-link {
+    color: var(--text-white);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-cyan);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--accent-cyan);
+    transform: translateY(-2px);
+}
+
+.nav-link:hover::before {
+    width: 100%;
+}
+
+/* ================================================
+   Main Content and Form Container
+   ================================================ */
+.main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+    padding: var(--spacing-xl) var(--spacing-md);
+}
+
+.form-container {
+    background: var(--primary-blue);
+    border-radius: 20px;
+    padding: var(--spacing-xl);
+    max-width: 600px;
+    width: 100%;
+    box-shadow: var(--shadow-card);
+    border: 2px solid var(--accent-cyan);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated background glow effect */
+.form-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 245, 255, 0.1) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.form-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: var(--spacing-sm);
+    background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-pink) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    z-index: 1;
+}
+
+.form-subtitle {
+    text-align: center;
+    color: var(--text-gray);
+    margin-bottom: var(--spacing-xl);
+    font-size: 1.1rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* ================================================
+   Form Input Styles with Floating Labels
+   ================================================ */
+.feedback-form {
+    position: relative;
+    z-index: 1;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-input {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(10, 14, 39, 0.6);
+    border: 2px solid rgba(0, 245, 255, 0.3);
+    border-radius: 10px;
+    color: var(--text-white);
+    font-size: 1rem;
+    font-family: 'Space Grotesk', sans-serif;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Floating Label Effect */
+.form-label {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    color: var(--text-gray);
+    font-size: 1rem;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    background: transparent;
+    padding: 0 0.5rem;
+}
+
+/* Label moves up when input is focused or has content */
+.form-input:focus + .form-label,
+.form-input:not(:placeholder-shown) + .form-label {
+    top: -0.75rem;
+    left: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--accent-cyan);
+    background: var(--primary-blue);
+}
+
+/* Input Hover and Focus Glow */
+.form-input:hover {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 15px rgba(0, 245, 255, 0.2);
+}
+
+.form-input:focus {
+    border-color: var(--accent-cyan);
+    box-shadow: var(--shadow-glow-cyan);
+    transform: translateY(-2px);
+}
+
+/* Valid State - Green Border */
+.form-input.valid {
+    border-color: var(--success-green);
+    box-shadow: 0 0 15px rgba(6, 255, 165, 0.3);
+}
+
+/* Error State - Red Glow Border */
+.form-input.error {
+    border-color: var(--error-red);
+    box-shadow: 0 0 15px rgba(255, 51, 102, 0.4);
+    animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* ================================================
+   Error Message Styles
+   ================================================ */
+.error-message {
+    display: block;
+    color: var(--error-red);
+    font-size: 0.9rem;
+    margin-top: var(--spacing-xs);
+    min-height: 20px;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.error-message.show {
+    opacity: 1;
+    transform: translateY(0);
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ================================================
+   Submit Button with Gorgeous Hover Animation
+   ================================================ */
+.submit-btn {
+    width: 100%;
+    padding: 1.2rem;
+    background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 100%);
+    border: none;
+    border-radius: 50px;
+    color: var(--text-white);
+    font-size: 1.2rem;
+    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    box-shadow: 0 5px 20px rgba(0, 245, 255, 0.3);
+}
+
+.btn-text {
+    position: relative;
+    z-index: 2;
+}
+
+.btn-glow {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.submit-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    background: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-purple) 100%);
+}
+
+.submit-btn:hover .btn-glow {
+    left: 100%;
+}
+
+.submit-btn:active {
+    transform: translateY(-2px);
+}
+
+/* ================================================
+   Success Message
+   ================================================ */
+.success-message {
+    margin-top: var(--spacing-lg);
+    padding: 1rem;
+    background: linear-gradient(135deg, rgba(6, 255, 165, 0.2) 0%, rgba(0, 245, 255, 0.2) 100%);
+    border: 2px solid var(--success-green);
+    border-radius: 10px;
+    color: var(--success-green);
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.5s ease;
+    display: none;
+}
+
+.success-message.show {
+    opacity: 1;
+    transform: scale(1);
+    display: block;
+    animation: successPop 0.6s ease;
+}
+
+@keyframes successPop {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ================================================
+   Responsive Design - Mobile Navigation Toggle
+   ================================================ */
+@media (max-width: 768px) {
+    /* Show hamburger toggle on mobile */
+    .nav-toggle {
+        display: flex;
+    }
+    
+    /* Hide menu by default on mobile */
+    .nav-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: rgba(26, 31, 58, 0.98);
+        backdrop-filter: blur(10px);
+        border-top: 2px solid var(--accent-cyan);
+        padding: var(--spacing-md);
+        gap: 0;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: all 0.4s ease;
+    }
+    
+    /* Show menu when active class is added */
+    .nav-menu.active {
+        max-height: 400px;
+        opacity: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        animation: slideDown 0.4s ease;
+    }
+    
+    @keyframes slideDown {
+        from {
+            max-height: 0;
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            max-height: 400px;
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .nav-menu li {
+        margin: 0;
+    }
+    
+    .nav-link {
+        display: block;
+        padding: 1rem;
+        border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+    }
+    
+    .nav-link:last-child {
+        border-bottom: none;
+    }
+    
+    /* Form adjustments for mobile */
+    .form-container {
+        padding: var(--spacing-lg);
+    }
+    
+    .form-title {
+        font-size: 2rem;
+    }
+    
+    .form-subtitle {
+        font-size: 1rem;
+    }
+}
+
+/* Desktop: Menu always visible */
+@media (min-width: 769px) {
+    .nav-menu {
+        display: flex !important;
+        opacity: 1 !important;
+        max-height: none !important;
+    }
+}
+
+/* ================================================
+   Additional Accessibility Improvements
+   ================================================ */
+.form-input:focus,
+.submit-btn:focus,
+.nav-toggle:focus,
+.nav-link:focus {
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: 2px;
+}
+
+/* High contrast focus indicator */
+*:focus-visible {
+    outline: 3px solid var(--accent-cyan);
+    outline-offset: 2px;
+}
+
+/* Smooth animations for reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
