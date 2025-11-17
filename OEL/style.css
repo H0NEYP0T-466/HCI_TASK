@@ -1,0 +1,462 @@
+/* 
+  High-Contrast UI for Feedback Form + Responsive Navigation
+  UPDATE: Toggle is now available on desktop as well (menu is collapsible across all breakpoints).
+  - Font: Space Grotesk (distinct, modern)
+  - Colorway: Deep Indigo / Navy + Electric Cyan + Neon Pink
+  - Features: Card layout, floating labels, hover glow, smooth transitions, accessible contrast
+*/
+
+/* 1) Design Tokens -------------------------------------------------------- */
+:root {
+  /* Core palette */
+  --bg: #0a0f1f;            /* Deep navy */
+  --bg-elev: #0f1730;       /* Elevated surface */
+  --text: #e6f0ff;          /* High-contrast text */
+  --muted: #a9b7d9;         /* Secondary text */
+  --line: #2a3554;          /* Subtle borders */
+
+  /* Accents */
+  --cyan: #22d3ee;          /* Bright Cyan */
+  --pink: #ff2e88;          /* Neon Pink */
+  --green: #22c55e;         /* Valid green */
+  --red: #ff4d6d;           /* Error red */
+
+  /* Effects */
+  --glow: 0 0 0 rgba(0,0,0,0);
+  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.45);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --ring-cyan: 0 0 0 0 rgba(34, 211, 238, 0);
+  --ring-red: 0 0 0 0 rgba(255, 77, 109, 0);
+
+  /* Typography */
+  --font: "Space Grotesk", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+
+  /* Motion */
+  --dur-fast: 160ms;
+  --dur: 260ms;
+  --dur-slow: 420ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.8, 0, 0.2, 1);
+}
+
+/* 2) Base / Reset --------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  line-height: 1.5;
+  color: var(--text);
+  background:
+    radial-gradient(1200px 800px at 10% 10%, rgba(34, 211, 238, 0.08), transparent 60%),
+    radial-gradient(1000px 700px at 90% 20%, rgba(255, 46, 136, 0.08), transparent 60%),
+    radial-gradient(1200px 800px at 50% 100%, rgba(34, 197, 94, 0.06), transparent 60%),
+    var(--bg);
+}
+
+img,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--cyan);
+  text-decoration: none;
+}
+
+a:hover,
+a:focus-visible {
+  text-decoration: underline;
+}
+
+.container {
+  width: min(1100px, 92vw);
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.stack-lg > * + * {
+  margin-block-start: clamp(1.5rem, 2.2vw, 2rem);
+}
+
+/* 3) Navigation ----------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(180deg, rgba(10, 15, 31, 0.95), rgba(10, 15, 31, 0.7) 90%, transparent);
+  backdrop-filter: saturate(140%) blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 68px;
+  gap: 1rem;
+  position: relative;
+}
+
+.nav__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  color: var(--text);
+}
+.brand__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 30%, var(--pink), var(--cyan));
+  box-shadow: 0 0 16px rgba(255, 46, 136, 0.7), 0 0 22px rgba(34, 211, 238, 0.6);
+}
+
+.nav__toggle {
+  display: inline-flex; /* visible on all breakpoints now */
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: border-color var(--dur) var(--ease-out), background var(--dur) var(--ease-out);
+}
+.nav__toggle:hover,
+.nav__toggle:focus-visible {
+  border-color: var(--cyan);
+  background: rgba(34, 211, 238, 0.06);
+  outline: none;
+}
+.nav__toggle .bar {
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: transform var(--dur) var(--ease-in-out), opacity var(--dur) var(--ease-in-out);
+}
+.nav__toggle.is-active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav__toggle.is-active .bar:nth-child(2) { opacity: 0; }
+.nav__toggle.is-active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Collapsible Menu (mobile-first: dropdown) */
+.nav__menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  max-height: 0;                /* collapsed by default */
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: max-height var(--dur-slow) var(--ease-out), opacity var(--dur) var(--ease-out), transform var(--dur) var(--ease-out);
+  background: linear-gradient(180deg, rgba(15, 23, 48, 0.92), rgba(15, 23, 48, 0.86));
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow-md);
+  position: absolute;
+  inset-inline: 1rem;
+  top: calc(68px + 0.5rem);
+  display: flex;
+  flex-direction: column;
+}
+
+.nav__menu.is-open {
+  max-height: 500px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nav__menu li {
+  border-bottom: 1px solid rgba(169, 183, 217, 0.08);
+}
+.nav__menu li:last-child { border-bottom: 0; }
+
+.nav__link {
+  display: block;
+  padding: 0.9rem 1rem;
+  color: var(--text);
+  transition: background var(--dur) var(--ease-out), color var(--dur) var(--ease-out), transform var(--dur) var(--ease-out);
+}
+.nav__link:hover,
+.nav__link:focus-visible {
+  background: rgba(34, 211, 238, 0.08);
+  color: white;
+  transform: translateX(2px);
+  outline: none;
+}
+
+/* Desktop: keep collapsible behavior, but set inline layout when open */
+@media (min-width: 880px) {
+  .nav__menu {
+    position: static;
+    inset: auto;
+    top: auto;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    flex-direction: row;
+    gap: 0.2rem;
+
+    /* Keep it collapsible on desktop as well (hidden by default) */
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  .nav__menu.is-open {
+    /* reveal horizontally */
+    max-height: 200px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .nav__link {
+    padding: 0.6rem 0.9rem;
+    border-radius: 10px;
+  }
+  .nav__link:hover,
+  .nav__link:focus-visible {
+    background: linear-gradient(90deg, rgba(34, 211, 238, 0.14), rgba(255, 46, 136, 0.12));
+  }
+}
+
+/* 4) Hero --------------------------------------------------------------- */
+.hero {
+  padding-block: clamp(1.2rem, 2.5vw, 2rem);
+}
+.hero__title {
+  font-size: clamp(1.8rem, 3.6vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.hero__subtitle {
+  margin: 0.6rem 0 0;
+  color: var(--muted);
+  max-width: 56ch;
+}
+
+/* 5) Card / Form --------------------------------------------------------- */
+.card {
+  background: linear-gradient(180deg, rgba(15, 23, 48, 0.85), rgba(15, 23, 48, 0.95));
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: clamp(1rem, 3.5vw, 2rem);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: clip;
+}
+.card::before {
+  /* Subtle animated border glow */
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 22px;
+  background: conic-gradient(from 180deg at 50% 50%, rgba(34, 211, 238, 0.2), rgba(255, 46, 136, 0.18), rgba(34, 211, 238, 0.2));
+  filter: blur(18px);
+  z-index: -1;
+}
+.card__title {
+  margin: 0 0 1rem 0;
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+}
+
+/* Floating field */
+.field {
+  position: relative;
+  margin-block: 1.1rem;
+}
+.field__control {
+  width: 100%;
+  color: var(--text);
+  background: #0d152b;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  padding: 1.1rem 1rem 1rem;
+  line-height: 1.4;
+  outline: none;
+  box-shadow: var(--glow);
+  transition: border-color var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out), background var(--dur) var(--ease-out);
+  caret-color: var(--cyan);
+}
+.field__control--textarea {
+  resize: vertical;
+  min-height: 132px;
+}
+
+.field__control::placeholder { color: transparent; }
+/* Label sits over placeholder */
+.field__label {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding-inline: 6px;
+  color: var(--muted);
+  background: transparent;
+  pointer-events: none;
+  transition: transform var(--dur) var(--ease-out), color var(--dur) var(--ease-out), background var(--dur) var(--ease-out), top var(--dur) var(--ease-out);
+}
+
+/* Hover / Focus glow */
+.field__control:hover {
+  box-shadow: 0 0 0 6px rgba(34, 211, 238, 0.08);
+}
+.field__control:focus-visible {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 8px rgba(34, 211, 238, 0.12), 0 0 0 2px rgba(34, 211, 238, 0.2) inset;
+}
+
+/* Float label when focused or when content present */
+.field__control:focus + .field__label,
+.field__control:not(:placeholder-shown) + .field__label {
+  top: 0;
+  transform: translateY(-50%) scale(0.9);
+  background: var(--bg-elev);
+  color: var(--cyan);
+}
+
+/* Errors */
+.field__error {
+  margin: 8px 10px 0;
+  color: var(--red);
+  font-size: 0.9rem;
+  min-height: 1.1em; /* Reserve space to reduce layout shift */
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity var(--dur) var(--ease-out), transform var(--dur) var(--ease-out);
+}
+.field__error.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.field.invalid .field__control {
+  border-color: var(--red);
+  box-shadow: 0 0 0 8px rgba(255, 77, 109, 0.12), 0 0 0 2px rgba(255, 77, 109, 0.25) inset;
+}
+.field.valid .field__control {
+  border-color: var(--green);
+  box-shadow: 0 0 0 8px rgba(34, 197, 94, 0.12), 0 0 0 2px rgba(34, 197, 94, 0.25) inset;
+}
+
+/* Form actions */
+.form__actions {
+  margin-top: 1.4rem;
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+/* Success / Status message */
+.form__status {
+  display: grid;
+  place-items: center;
+  margin-bottom: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  background: linear-gradient(180deg, rgba(34, 197, 94, 0.12), rgba(34, 197, 94, 0.06));
+  color: #d9ffe8;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity var(--dur) var(--ease-out), transform var(--dur) var(--ease-out);
+}
+.form__status.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 6) Buttons -------------------------------------------------------------- */
+.btn {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  color: white;
+}
+
+.btn--neon {
+  --grad: linear-gradient(135deg, var(--cyan), var(--pink) 55%, #7c3aed);
+  position: relative;
+  padding: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform var(--dur) var(--ease-out);
+}
+.btn--neon:active {
+  transform: translateY(1px) scale(0.99);
+}
+.btn--neon .btn__inner {
+  display: inline-block;
+  padding: 0.9rem 1.2rem;
+  background: var(--grad);
+  border-radius: 14px;
+  box-shadow: 0 10px 40px rgba(34, 211, 238, 0.3), 0 8px 26px rgba(255, 46, 136, 0.22);
+  transition: filter var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
+  position: relative;
+  z-index: 1;
+}
+
+/* Shimmer on hover */
+.btn--neon .btn__inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+  transform: translateX(-100%);
+  transition: transform 800ms var(--ease-out);
+  mix-blend-mode: screen;
+}
+.btn--neon:hover .btn__inner::after,
+.btn--neon:focus-visible .btn__inner::after {
+  transform: translateX(100%);
+}
+.btn--neon:hover .btn__inner,
+.btn--neon:focus-visible .btn__inner {
+  filter: brightness(1.08) saturate(1.1);
+  box-shadow: 0 18px 60px rgba(34, 211, 238, 0.36), 0 16px 36px rgba(255, 46, 136, 0.28);
+}
+.btn--neon:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 8px rgba(34, 211, 238, 0.12);
+}
+
+/* 7) Footer --------------------------------------------------------------- */
+.site-footer {
+  padding: 2.2rem 0 3rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* 8) No-JS Notice --------------------------------------------------------- */
+.no-js {
+  width: min(1100px, 92vw);
+  margin: 2rem auto;
+  padding: 1rem;
+  border-radius: 12px;
+  background: #201d2b;
+  border: 1px solid var(--line);
+}
+
+/* 9) Reduced Motion ------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition-duration: 1ms !important;
+  }
+}
