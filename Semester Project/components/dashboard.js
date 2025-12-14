@@ -177,12 +177,13 @@
 
   // Auto-show notification modal once per session
   const notificationsShown = sessionStorage.getItem('notificationsShown');
+  const NOTIFICATION_DELAY = 500; // Delay before showing notification modal
   if (!notificationsShown) {
     // Show modal after a brief delay
     setTimeout(() => {
       showNotificationModal();
       sessionStorage.setItem('notificationsShown', 'true');
-    }, 500);
+    }, NOTIFICATION_DELAY);
   }
 
   // Keyboard accessibility - Escape key to close modals
@@ -334,7 +335,7 @@
   function renderDashboard() {
     const s = window.SampleData.student;
     document.getElementById('enrolledSemester').textContent = s.session;
-    document.getElementById('outstandingFee').textContent = String(s.outstanding);
+    document.getElementById('outstandingFee').textContent = s.outstanding;
     document.getElementById('cgpa').textContent = s.cgpa.toFixed(2);
     document.getElementById('classSection').textContent = s.section;
 

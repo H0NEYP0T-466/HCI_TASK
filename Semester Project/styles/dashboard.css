@@ -729,6 +729,7 @@ td {
   .sidebar:hover,
   .sidebar:focus-within {
     width: 240px;
+    /* Large box-shadow creates a backdrop effect for mobile */
     box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
   }
 
