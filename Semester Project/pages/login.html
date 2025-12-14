@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="../styles/login.css" />
 </head>
 <body class="login-page">
-  <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px;">
+  <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; position: relative;">
     <div class="glass-card">
       <div class="logo-container">
         <img src="../assets/lgu.png" alt="University Logo" />
@@ -55,20 +55,32 @@
         </div>
       </form>
     </div>
+    
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+      <div class="loading-content">
+        <div class="spinner-large"></div>
+        <span class="loading-text">Logging in...</span>
+      </div>
+    </div>
   </div>
 
   <script>
     // Roll pattern: fa-YY-program-XXX (case-insensitive)
     const rollRegex = /^fa-\d{2}-[a-z]{3,}-\d{1,4}$/i;
+    let isSubmitting = false;
 
     document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
+      
+      // Prevent double submit
+      if (isSubmitting) return;
       
       const username = document.getElementById('username').value.trim();
       const password = document.getElementById('password').value.trim();
       const errorMsg = document.getElementById('errorMsg');
       const loginBtn = document.getElementById('loginBtn');
-      const loginText = document.getElementById('loginText');
+      const loadingOverlay = document.getElementById('loadingOverlay');
 
       // Validate credentials
       const isRollValid = rollRegex.test(username);
@@ -82,9 +94,10 @@
       // Hide error if shown
       errorMsg.classList.remove('show');
 
-      // Show loading state
+      // Show loading overlay
+      isSubmitting = true;
       loginBtn.disabled = true;
-      loginText.innerHTML = '<div class="spinner"></div><span>Logging in...</span>';
+      loadingOverlay.classList.add('show');
 
       // Simulate realistic loading delay
       setTimeout(() => {
