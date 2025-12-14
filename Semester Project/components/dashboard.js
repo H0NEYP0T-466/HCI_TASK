@@ -158,6 +158,12 @@
         item.style.cursor = 'pointer';
         item.addEventListener('click', () => {
           hideNotificationModal();
+          
+          // Collapse sidebar after navigation
+          if (elements.mainContent) {
+            elements.mainContent.style.marginLeft = SIDEBAR_COLLAPSED_WIDTH;
+          }
+          
           showView(route);
           
           // Render specific views
@@ -304,6 +310,11 @@
       const route = link.dataset.route;
       if (!route) return;
 
+      // Collapse sidebar after navigation
+      if (elements.mainContent) {
+        elements.mainContent.style.marginLeft = SIDEBAR_COLLAPSED_WIDTH;
+      }
+
       showView(route);
 
       // Render specific views
@@ -322,6 +333,11 @@
     card.addEventListener('click', (e) => {
       const route = card.dataset.route;
       if (!route) return;
+
+      // Collapse sidebar after navigation
+      if (elements.mainContent) {
+        elements.mainContent.style.marginLeft = SIDEBAR_COLLAPSED_WIDTH;
+      }
 
       // Only navigate if the route view exists
       if (views[route]) {
@@ -342,6 +358,12 @@
   if (elements.homeBrand) {
     elements.homeBrand.addEventListener('click', (e) => {
       e.preventDefault();
+      
+      // Collapse sidebar after navigation
+      if (elements.mainContent) {
+        elements.mainContent.style.marginLeft = SIDEBAR_COLLAPSED_WIDTH;
+      }
+      
       showView('dashboard');
       renderDashboard();
     });
@@ -524,11 +546,6 @@
         <td><span class="badge ${ch.status === 'Paid' ? 'badge-success' : 'badge-warning'}">${ch.status}</span></td>
         <td>${ch.issueDate}</td>
         <td>${ch.dueDate}</td>
-        <td>
-          <button class="btn-primary" style="padding: 6px 12px; font-size: 13px;">
-            <i class="fa-solid fa-print"></i> Print
-          </button>
-        </td>
       `;
       tbody.appendChild(tr);
     });
