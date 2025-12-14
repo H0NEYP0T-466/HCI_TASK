@@ -729,7 +729,7 @@ td {
   .sidebar:hover,
   .sidebar:focus-within {
     width: 240px;
-    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
   }
 
   .stats-grid {

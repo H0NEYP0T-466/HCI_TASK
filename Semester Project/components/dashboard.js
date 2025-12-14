@@ -333,7 +333,7 @@
   // Dashboard render
   function renderDashboard() {
     const s = window.SampleData.student;
-    document.getElementById('enrolledSemester').textContent = 'Fa–2025';
+    document.getElementById('enrolledSemester').textContent = s.session;
     document.getElementById('outstandingFee').textContent = String(s.outstanding);
     document.getElementById('cgpa').textContent = s.cgpa.toFixed(2);
     document.getElementById('classSection').textContent = s.section;
