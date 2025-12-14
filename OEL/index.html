@@ -6,16 +6,13 @@
     <title>Neon Feedback — High Contrast UI</title>
     <meta name="description" content="A modern, high-contrast feedback form with accessible validation and a responsive, toggleable navigation menu." />
 
-    <!-- Google Font: Space Grotesk (modern, distinctive, high legibility) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
-
-    <!-- Site Styles -->
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- Header / Navigation -->
+
     <header class="site-header">
       <nav class="nav container" aria-label="Primary">
         <a class="nav__brand" href="#home" aria-label="Neon Feedback home">
@@ -33,10 +30,6 @@
           NeonFeedback
         </a>
 
-        <!-- Hamburger / Toggle Button (now visible on desktop too) -->
-      
-
-        <!-- Collapsible Menu -->
         <ul id="primary-menu" class="nav__menu">
           <li><a href="#home" class="nav__link">Home</a></li>
           <li><a href="#features" class="nav__link">Features</a></li>
@@ -46,7 +39,7 @@
       </nav>
     </header>
 
-    <!-- Main Content -->
+
     <main id="home" class="container">
       <section class="stack-lg">
         <header class="hero">
@@ -55,18 +48,16 @@
             Tell us what’s working and what isn’t. Your insight helps us craft better experiences.
           </p>
         </header>
-
-        <!-- Feedback Form Card -->
         <article class="card" aria-labelledby="feedback-title">
           <h2 id="feedback-title" class="card__title">Feedback Form</h2>
 
-          <!-- Success / Status message (hidden by default) -->
+
           <div id="formStatus" class="form__status" role="alert" aria-live="assertive" hidden>
-            <!-- Set via JS -->
+    
           </div>
 
           <form id="feedbackForm" novalidate>
-            <!-- Name -->
+
             <div class="field" data-field="name">
               <input
                 class="field__control"
@@ -82,7 +73,7 @@
               <p class="field__error" id="error-name" aria-live="polite"></p>
             </div>
 
-            <!-- Email -->
+
             <div class="field" data-field="email">
               <input
                 class="field__control"
@@ -98,7 +89,7 @@
               <p class="field__error" id="error-email" aria-live="polite"></p>
             </div>
 
-            <!-- Comments -->
+
             <div class="field" data-field="comments">
               <textarea
                 class="field__control field__control--textarea"
@@ -113,7 +104,7 @@
               <p class="field__error" id="error-comments" aria-live="polite"></p>
             </div>
 
-            <!-- Submit -->
+
             <div class="form__actions">
               <button type="submit" class="btn btn--neon" aria-label="Submit feedback">
                 <span class="btn__inner">Submit Feedback</span>
@@ -130,7 +121,7 @@
       </p>
     </footer>
 
-    <!-- Scripts -->
+
     <script src="script.js"></script>
     <noscript>
       <p class="no-js">JavaScript is required for form validation and menu toggling.</p>

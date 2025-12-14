@@ -1,21 +1,12 @@
-/* 
-  script.js
-  - Navigation toggle with smooth slide animation
-    (now enabled on desktop as well—menu is collapsible across all screen sizes)
-  - Client-side validation for feedback form
-    * All fields required
-    * If invalid: prevent submission, show animated error, red glow border
-    * If valid: green borders, animated success message
-  - Clean, commented, and accessible
-*/
+
 
 document.addEventListener("DOMContentLoaded", () => {
-  // ====== NAVIGATION TOGGLE =================================================
+
   const navToggle = document.querySelector(".nav__toggle");
   const navMenu = document.getElementById("primary-menu");
 
   if (navToggle && navMenu) {
-    // Initial state: collapsed (aria-expanded=false)
+
     navToggle.setAttribute("aria-expanded", "false");
 
     navToggle.addEventListener("click", () => {
@@ -24,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
       navToggle.setAttribute("aria-expanded", String(isOpen));
     });
 
-    // Close the menu if a link is clicked (nice UX for all breakpoints)
+
     navMenu.addEventListener("click", (e) => {
       const target = e.target;
       if (target && target.matches("a.nav__link")) {
@@ -36,21 +27,21 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Ensure breakpoint changes don't leave stale state
+
     const mq = window.matchMedia("(min-width: 880px)");
     mq.addEventListener("change", () => {
-      // Keep the menu collapsed by default when resizing; user can open as desired
+
       navMenu.classList.remove("is-open");
       navToggle.classList.remove("is-active");
       navToggle.setAttribute("aria-expanded", "false");
     });
   }
 
-  // ====== FORM VALIDATION ===================================================
+
   const form = document.getElementById("feedbackForm");
   const statusEl = document.getElementById("formStatus");
 
-  // Map field names to their configs for easy iteration
+
   const fields = {
     name: {
       el: document.getElementById("name"),
@@ -61,9 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
       el: document.getElementById("email"),
       errorEl: document.getElementById("error-email"),
       requiredMsg: "Please enter your email.",
-      // Optional basic email check (requirement is only 'not empty')
-      // pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-      // invalidMsg: "Please enter a valid email address.",
+
     },
     comments: {
       el: document.getElementById("comments"),
@@ -72,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   };
 
-  // Attach input listeners to clear errors as the user types
+
   Object.values(fields).forEach(({ el, errorEl }) => {
     if (!el) return;
     el.addEventListener("input", () => {
@@ -80,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
       markAsValidIfFilled(el);
     });
     el.addEventListener("blur", () => {
-      // Provide light validation feedback on blur
+
       if (el.value.trim().length === 0) {
         setError(el, errorEl, getRequiredMsg(el.id));
       } else {
@@ -89,13 +78,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Handle form submission
+
   form?.addEventListener("submit", (event) => {
-    event.preventDefault(); // We will conditionally submit later if needed
+    event.preventDefault(); 
 
     let hasError = false;
 
-    // Validate each field is non-empty
+
     for (const [key, cfg] of Object.entries(fields)) {
       const value = cfg.el?.value.trim() || "";
       if (value.length === 0) {
@@ -104,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
         continue;
       }
 
-      // Optional: email pattern check
+    
       if (key === "email" && cfg.pattern) {
         if (!cfg.pattern.test(value)) {
           setError(cfg.el, cfg.errorEl, cfg.invalidMsg || "Invalid email.");
@@ -112,7 +101,14 @@ document.addEventListener("DOMContentLoaded", () => {
           continue;
         }
       }
-
+      if(key==="name"){
+        const namePattern = /^[a-zA-Z\s'-]+$/;
+        if (!namePattern.test(value)) {
+          setError(cfg.el, cfg.errorEl, "Invalid name.");
+          hasError = true;
+          continue;
+        }
+      }
       setValid(cfg.el);
       clearError(cfg.el, cfg.errorEl);
     }
@@ -122,13 +118,15 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // If valid: show success and optionally reset the form
+
+
+
     showStatus("Thanks! Your feedback was sent successfully.", "success");
     visualSuccessPulse();
-    // Reset after a slight delay to show green borders momentarily
+
     setTimeout(() => {
       form.reset();
-      // Remove validation states after reset
+   
       Object.values(fields).forEach(({ el, errorEl }) => {
         clearError(el, errorEl);
         clearValidationState(el);
@@ -136,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 800);
   });
 
-  // ====== Helper Functions ==================================================
+
   function getRequiredMsg(id) {
     switch (id) {
       case "name":
@@ -158,9 +156,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (errorEl) {
       errorEl.textContent = message;
-      errorEl.classList.add("show"); // fade-in animation via CSS
+      errorEl.classList.add("show"); 
     }
-    // ARIA state
+
     inputEl?.setAttribute("aria-invalid", "true");
   }
 
@@ -204,10 +202,9 @@ document.addEventListener("DOMContentLoaded", () => {
     statusEl.hidden = false;
     statusEl.textContent = message;
 
-    // Reset and re-run transition
+
     statusEl.classList.remove("show");
-    // Trigger reflow so the transition replays when re-adding 'show'
-    // eslint-disable-next-line no-unused-expressions
+
     statusEl.offsetHeight; 
     statusEl.classList.add("show");
 
@@ -223,7 +220,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function visualSuccessPulse() {
-    // Briefly pulse the submit button as a confirmation
     const btn = document.querySelector(".btn--neon .btn__inner");
     if (!btn) return;
     const prev = btn.style.transform;

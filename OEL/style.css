@@ -1,25 +1,17 @@
-/* 
-  High-Contrast UI for Feedback Form + Responsive Navigation
-  UPDATE: Toggle is now available on desktop as well (menu is collapsible across all breakpoints).
-  - Font: Space Grotesk (distinct, modern)
-  - Colorway: Deep Indigo / Navy + Electric Cyan + Neon Pink
-  - Features: Card layout, floating labels, hover glow, smooth transitions, accessible contrast
-*/
 
-/* 1) Design Tokens -------------------------------------------------------- */
 :root {
-  /* Core palette */
-  --bg: #0a0f1f;            /* Deep navy */
-  --bg-elev: #0f1730;       /* Elevated surface */
-  --text: #e6f0ff;          /* High-contrast text */
-  --muted: #a9b7d9;         /* Secondary text */
-  --line: #2a3554;          /* Subtle borders */
 
-  /* Accents */
-  --cyan: #22d3ee;          /* Bright Cyan */
-  --pink: #ff2e88;          /* Neon Pink */
-  --green: #22c55e;         /* Valid green */
-  --red: #ff4d6d;           /* Error red */
+  --bg: #0a0f1f;           
+  --bg-elev: #0f1730;       
+  --text: #e6f0ff;          
+  --muted: #a9b7d9;         
+  --line: #2a3554;          
+
+
+  --cyan: #22d3ee;          
+  --pink: #ff2e88;          
+  --green: #22c55e;         
+  --red: #ff4d6d;           
 
   /* Effects */
   --glow: 0 0 0 rgba(0,0,0,0);
@@ -39,7 +31,6 @@
   --ease-in-out: cubic-bezier(0.8, 0, 0.2, 1);
 }
 
-/* 2) Base / Reset --------------------------------------------------------- */
 *,
 *::before,
 *::after {
