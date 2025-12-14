@@ -257,10 +257,6 @@ body {
   transition: margin-left 0.3s ease;
 }
 
-.sidebar:hover ~ .main-content {
-  margin-left: 260px;
-}
-
 /* Dashboard Cards */
 .dashboard-header {
   margin-bottom: 24px;
