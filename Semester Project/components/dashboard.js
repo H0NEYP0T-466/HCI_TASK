@@ -44,8 +44,21 @@
   let sidebarToggled = false;
   let isDesktop = window.matchMedia('(min-width: 769px)').matches;
 
-  // Update isDesktop on resize
-  window.addEventListener('resize', () => {
+  // Debounce helper function
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+
+  // Update isDesktop on resize (debounced)
+  const handleResize = debounce(() => {
     isDesktop = window.matchMedia('(min-width: 769px)').matches;
     
     // Reset sidebar state on resize
@@ -57,7 +70,9 @@
     } else {
       elements.mainContent.style.marginLeft = '0';
     }
-  });
+  }, 150);
+
+  window.addEventListener('resize', handleResize);
 
   // Helper function to collapse sidebar
   function collapseSidebar() {
@@ -112,22 +127,21 @@
 
   // Sidebar hover effect for content shift (desktop only with hover capability)
   if (elements.sidebar && elements.mainContent) {
-    // Only add hover listeners on devices with hover capability
-    const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    elements.sidebar.addEventListener('mouseenter', () => {
+      // Check hover capability dynamically
+      const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      if (hasHover && isDesktop && !sidebarToggled) {
+        expandSidebar();
+      }
+    });
     
-    if (hasHover) {
-      elements.sidebar.addEventListener('mouseenter', () => {
-        if (isDesktop && !sidebarToggled) {
-          expandSidebar();
-        }
-      });
-      
-      elements.sidebar.addEventListener('mouseleave', () => {
-        if (isDesktop && !sidebarToggled) {
-          collapseSidebar();
-        }
-      });
-    }
+    elements.sidebar.addEventListener('mouseleave', () => {
+      // Check hover capability dynamically
+      const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      if (hasHover && isDesktop && !sidebarToggled) {
+        collapseSidebar();
+      }
+    });
   }
 
   // Initialize sidebar state

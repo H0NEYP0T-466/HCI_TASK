@@ -777,18 +777,6 @@ td {
     box-shadow: var(--shadow-md);
   }
 
-  /* Disable hover on mobile */
-  .sidebar:hover {
-    transform: translateX(-100%);
-    width: 260px;
-    box-shadow: var(--shadow-sm);
-  }
-  
-  .sidebar.open:hover {
-    transform: translateX(0);
-    box-shadow: var(--shadow-md);
-  }
-
   .stats-grid {
     grid-template-columns: 1fr;
   }
