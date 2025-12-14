@@ -68,6 +68,7 @@
       collapseSidebar();
     } else {
       elements.mainContent.style.marginLeft = '0';
+      elements.mainContent.style.width = '100%';
     }
   }, 150);
 
@@ -77,6 +78,7 @@
   function collapseSidebar() {
     if (isDesktop && elements.mainContent) {
       elements.mainContent.style.marginLeft = SIDEBAR_COLLAPSED_WIDTH;
+      elements.mainContent.style.width = `calc(100% - ${SIDEBAR_COLLAPSED_WIDTH})`;
     }
   }
 
@@ -84,6 +86,7 @@
   function expandSidebar() {
     if (isDesktop && elements.mainContent) {
       elements.mainContent.style.marginLeft = SIDEBAR_EXPANDED_WIDTH;
+      elements.mainContent.style.width = `calc(100% - ${SIDEBAR_EXPANDED_WIDTH})`;
     }
   }
 
