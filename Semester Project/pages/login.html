@@ -48,20 +48,13 @@
 
         <button type="submit" class="btn-login" id="loginBtn">
           <span id="loginText">Login</span>
+          <div class="spinner" id="loginSpinner" style="display: none;"></div>
         </button>
 
         <div id="errorMsg" class="error-message">
           Incorrect roll number or password. Please try again.
         </div>
       </form>
-    </div>
-    
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-      <div class="loading-content">
-        <div class="spinner-large"></div>
-        <span class="loading-text">Logging in...</span>
-      </div>
     </div>
   </div>
 
@@ -80,7 +73,6 @@
       const password = document.getElementById('password').value.trim();
       const errorMsg = document.getElementById('errorMsg');
       const loginBtn = document.getElementById('loginBtn');
-      const loadingOverlay = document.getElementById('loadingOverlay');
 
       // Validate credentials
       const isRollValid = rollRegex.test(username);
@@ -94,10 +86,13 @@
       // Hide error if shown
       errorMsg.classList.remove('show');
 
-      // Show loading overlay
+      // Show loading state on button
       isSubmitting = true;
       loginBtn.disabled = true;
-      loadingOverlay.classList.add('show');
+      const loginText = document.getElementById('loginText');
+      const loginSpinner = document.getElementById('loginSpinner');
+      loginText.style.display = 'none';
+      loginSpinner.style.display = 'block';
 
       // Simulate realistic loading delay
       setTimeout(() => {
