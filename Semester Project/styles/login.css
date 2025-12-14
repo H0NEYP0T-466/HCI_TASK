@@ -1,0 +1,239 @@
+/* Login Page Styles - Glassmorphism Design */
+
+/* Color Palette */
+:root {
+  --dark-green: #1E5E1E;
+  --accent-green: #2E7D32;
+  --white: #FFFFFF;
+  --card-overlay: rgba(255, 255, 255, 0.65);
+  --input-border: rgba(30, 94, 30, 0.3);
+}
+
+/* Background with blur image */
+body.login-page {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-image: url('../assets/blur_login_img.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: 'Inter', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Glassmorphism Card */
+.glass-card {
+  background: var(--card-overlay);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 40px;
+  max-width: 480px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Top accent bar */
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--dark-green);
+}
+
+/* Inner highlight */
+.glass-card::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0) 0%, 
+    rgba(255, 255, 255, 0.5) 50%, 
+    rgba(255, 255, 255, 0) 100%);
+}
+
+/* Logo container */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.logo-container img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+.portal-title {
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--dark-green);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.portal-subtitle {
+  font-size: 18px;
+  color: var(--dark-green);
+  opacity: 0.8;
+  margin-top: 4px;
+}
+
+/* Form styling */
+.login-form {
+  margin-top: 32px;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--dark-green);
+  margin-bottom: 8px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 16px;
+  font-family: 'Inter', 'Roboto', sans-serif;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  border-bottom: 2px solid var(--input-border);
+  border-radius: 8px 8px 0 0;
+  outline: none;
+  transition: background-color 0.3s ease, border-bottom-color 0.3s ease, box-shadow 0.3s ease;
+  color: #333;
+}
+
+.form-input::placeholder {
+  color: rgba(30, 94, 30, 0.5);
+}
+
+.form-input:focus {
+  background: rgba(255, 255, 255, 0.6);
+  border-bottom-color: var(--dark-green);
+  box-shadow: 0 2px 8px rgba(30, 94, 30, 0.1);
+}
+
+.form-hint {
+  font-size: 13px;
+  color: var(--dark-green);
+  opacity: 0.7;
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+/* Primary Button */
+.btn-login {
+  width: 100%;
+  height: 56px;
+  background: var(--dark-green);
+  color: var(--white);
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 16px rgba(30, 94, 30, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-login:hover:not(:disabled) {
+  background: var(--accent-green);
+  box-shadow: 0 6px 20px rgba(30, 94, 30, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-login:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-login:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Loading spinner */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: var(--white);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Error message */
+.error-message {
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-top: 16px;
+  border-left: 3px solid #dc3545;
+  display: none;
+}
+
+.error-message.show {
+  display: block;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 576px) {
+  .glass-card {
+    padding: 32px 24px;
+    margin: 16px;
+  }
+
+  .portal-title {
+    font-size: 32px;
+  }
+
+  .logo-container img {
+    width: 56px;
+    height: 56px;
+  }
+}

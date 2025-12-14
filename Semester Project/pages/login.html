@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student Portal - Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/login.css" />
+</head>
+<body class="login-page">
+  <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px;">
+    <div class="glass-card">
+      <div class="logo-container">
+        <img src="../assets/lgu.png" alt="University Logo" />
+        <div>
+          <h1 class="portal-title">Student Portal</h1>
+          <p class="portal-subtitle">Lahore Garrison University</p>
+        </div>
+      </div>
+
+      <form id="loginForm" class="login-form">
+        <div class="form-group">
+          <label for="username" class="form-label">Roll Number</label>
+          <input 
+            type="text" 
+            class="form-input" 
+            id="username" 
+            placeholder="fa-23-bscs-567" 
+            required 
+            autocomplete="username"
+          />
+          <div class="form-hint">Format: fa-YY-program-XXX (e.g., fa-23-bscs-567). Case-insensitive.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="form-label">Password</label>
+          <input 
+            type="password" 
+            class="form-input" 
+            id="password" 
+            placeholder="Enter your password" 
+            required 
+            autocomplete="current-password"
+          />
+        </div>
+
+        <button type="submit" class="btn-login" id="loginBtn">
+          <span id="loginText">Login</span>
+        </button>
+
+        <div id="errorMsg" class="error-message">
+          Incorrect roll number or password. Please try again.
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Roll pattern: fa-YY-program-XXX (case-insensitive)
+    const rollRegex = /^fa-\d{2}-[a-z]{3,}-\d{1,4}$/i;
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const errorMsg = document.getElementById('errorMsg');
+      const loginBtn = document.getElementById('loginBtn');
+      const loginText = document.getElementById('loginText');
+
+      // Validate credentials
+      const isRollValid = rollRegex.test(username);
+      const isPasswordValid = password === '12345';
+
+      if (!isRollValid || !isPasswordValid) {
+        errorMsg.classList.add('show');
+        return;
+      }
+
+      // Hide error if shown
+      errorMsg.classList.remove('show');
+
+      // Show loading state
+      loginBtn.disabled = true;
+      loginText.innerHTML = '<div class="spinner"></div><span>Logging in...</span>';
+
+      // Simulate realistic loading delay
+      setTimeout(() => {
+        // Auth success
+        localStorage.setItem('isAuthenticated', 'true');
+        localStorage.setItem('studentName', 'Shoaib Rafiq');
+        localStorage.setItem('rollNumber', username);
+        window.location.href = '../index.html';
+      }, 1500);
+    });
+
+    // Clear error message on input
+    document.getElementById('username').addEventListener('input', () => {
+      document.getElementById('errorMsg').classList.remove('show');
+    });
+    document.getElementById('password').addEventListener('input', () => {
+      document.getElementById('errorMsg').classList.remove('show');
+    });
+  </script>
+</body>
+</html>
