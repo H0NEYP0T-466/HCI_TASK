@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student Portal - Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles/dashboard.css" />
+</head>
+<body>
+  <!-- Top Navbar -->
+  <nav class="navbar">
+    <div class="navbar-content">
+      <a href="#" class="navbar-brand" id="homeBrand">
+        <img src="../assets/lgu.png" alt="LGU Logo" class="lgu-logo" />
+        <div class="brand-text">
+          <div class="brand-title">Lahore Garrison University</div>
+          <div class="brand-subtitle">Student Portal</div>
+        </div>
+      </a>
+      <div class="navbar-actions">
+        <div class="student-badge" id="studentInfo"></div>
+        <button class="icon-btn" id="notifBtn" aria-label="Notifications">
+          <i class="fa-regular fa-bell"></i>
+          <span class="notif-badge" id="notifCount">0</span>
+        </button>
+        <button class="btn-logout" id="logoutBtn">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Layout Container -->
+  <div class="layout-container">
+    <!-- Sidebar - Hidden by default, shows on hover -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <img src="../assets/lgu.png" alt="LGU Logo" class="lgu-logo" />
+        <div class="sidebar-title">LGU Portal</div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-route="dashboard">
+          <i class="fa-solid fa-gauge-high"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="#" class="nav-item" data-route="attendance">
+          <i class="fa-regular fa-calendar-check"></i>
+          <span>Attendance</span>
+        </a>
+        <a href="#" class="nav-item" data-route="courses">
+          <i class="fa-solid fa-book"></i>
+          <span>Courses</span>
+        </a>
+        <a href="#" class="nav-item" data-route="fee">
+          <i class="fa-solid fa-file-invoice-dollar"></i>
+          <span>Fee / Challan</span>
+        </a>
+        <a href="#" class="nav-item" data-route="calendar">
+          <i class="fa-regular fa-calendar-days"></i>
+          <span>Academic Calendar</span>
+        </a>
+        <a href="#" class="nav-item" data-route="profile">
+          <i class="fa-regular fa-user"></i>
+          <span>Profile</span>
+        </a>
+        <a href="#" class="nav-item" id="logoutLink">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        © 2025 ERP Team
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Dashboard View -->
+      <section id="dashboardView" class="view active">
+        <div class="dashboard-header">
+          <h1>Dashboard</h1>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon green">
+              <i class="fa-solid fa-calendar-days"></i>
+            </div>
+            <div class="stat-content">
+              <div class="stat-label">Enrolled Semester</div>
+              <div class="stat-value" id="enrolledSemester">Fa-2025</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon warning">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="stat-content">
+              <div class="stat-label">Outstanding</div>
+              <div class="stat-value" id="outstandingFee">66,528</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon info">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div class="stat-content">
+              <div class="stat-label">CGPA</div>
+              <div class="stat-value" id="cgpa">2.89</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon dark">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div class="stat-content">
+              <div class="stat-label">Section</div>
+              <div class="stat-value" id="classSection">L</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="content-grid">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Attendance</h3>
+              <button class="btn-primary" data-route="attendance">View Details</button>
+            </div>
+            <div class="card-body">
+              <canvas id="dashboardAttendanceChart" height="140"></canvas>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Student Challans</h3>
+              <button class="btn-primary" data-route="fee">View All</button>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Session</th>
+                      <th>Type</th>
+                      <th>Status</th>
+                      <th>Due Date</th>
+                    </tr>
+                  </thead>
+                  <tbody id="recentChallansBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-grid">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Academic Calendar</h3>
+              <button class="btn-primary" data-route="calendar">View Full</button>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Activity</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dashboardCalendarBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Current Courses</h3>
+              <button class="btn-primary" data-route="courses">View All</button>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Course Name</th>
+                      <th>Teacher</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dashboardCoursesBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Other Views (Attendance, Courses, Fee, Calendar, Profile) -->
+      <section id="attendanceView" class="view">
+        <div class="dashboard-header">
+          <h1>Attendance</h1>
+        </div>
+        <div class="content-grid">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Subject-wise Attendance</h3>
+              <select id="subjectSelect" class="btn-secondary"></select>
+            </div>
+            <div class="card-body">
+              <canvas id="attendanceChart" height="160"></canvas>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Attendance Summary</h3>
+              <button class="btn-secondary" id="refreshAttendance">Refresh</button>
+            </div>
+            <div class="card-body" id="attendanceSummary"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="coursesView" class="view">
+        <div class="dashboard-header">
+          <h1>Courses</h1>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Course Code</th>
+                    <th>Course Name</th>
+                    <th>Teacher Name</th>
+                    <th>Section</th>
+                  </tr>
+                </thead>
+                <tbody id="coursesTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="feeView" class="view">
+        <div class="dashboard-header">
+          <h1>Fee / Challan</h1>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Challan No</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Issue Date</th>
+                    <th>Due Date</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="challanTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="calendarView" class="view">
+        <div class="dashboard-header">
+          <h1>Academic Calendar</h1>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Activity</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody id="calendarTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="profileView" class="view">
+        <div class="dashboard-header">
+          <h1>Profile</h1>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div style="display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
+              <img src="../assets/lgu.png" class="lgu-logo" alt="LGU Logo" style="width: 80px; height: 80px;" />
+              <div style="flex: 1;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                  <div>
+                    <div style="font-size: 12px; color: #666; margin-bottom: 4px;">Student Name</div>
+                    <div style="font-weight: 600;" id="profileName">—</div>
+                  </div>
+                  <div>
+                    <div style="font-size: 12px; color: #666; margin-bottom: 4px;">Roll Number</div>
+                    <div style="font-weight: 600;" id="profileRoll">—</div>
+                  </div>
+                  <div>
+                    <div style="font-size: 12px; color: #666; margin-bottom: 4px;">Program</div>
+                    <div style="font-weight: 600;">BSCS</div>
+                  </div>
+                  <div>
+                    <div style="font-size: 12px; color: #666; margin-bottom: 4px;">Session</div>
+                    <div style="font-weight: 600;">Fa-2025</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Notification Card -->
+  <div class="notification-card" id="notificationCard">
+    <div class="notification-header">
+      <h3>Notifications</h3>
+      <button class="btn-close" id="closeNotifications" aria-label="Close">×</button>
+    </div>
+    <div class="notification-body" id="notificationBody"></div>
+  </div>
+
+  <!-- Logout Confirmation Modal -->
+  <div class="modal" id="logoutModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Confirm Logout</h2>
+        <button class="btn-close" id="closeLogoutModal">×</button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to logout?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="cancelLogout">Cancel</button>
+        <button class="btn-logout" id="confirmLogout">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loader -->
+  <div class="loader" id="loader">
+    <div class="spinner"></div>
+    <span>Loading...</span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="../data.js"></script>
+  <script src="../components/dashboard.js"></script>
+</body>
+</html>
