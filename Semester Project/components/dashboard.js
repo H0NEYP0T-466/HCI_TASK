@@ -31,29 +31,126 @@
     homeBrand: document.getElementById('homeBrand'),
     loader: document.getElementById('loader'),
     sidebar: document.getElementById('sidebar'),
+    sidebarBackdrop: document.getElementById('sidebarBackdrop'),
+    hamburgerBtn: document.getElementById('hamburgerBtn'),
     mainContent: document.querySelector('.main-content')
   };
 
   // Sidebar dimensions
   const SIDEBAR_COLLAPSED_WIDTH = '72px';
   const SIDEBAR_EXPANDED_WIDTH = '260px';
+  const MOBILE_BREAKPOINT = '(min-width: 769px)';
+
+  // Sidebar state management
+  let sidebarToggled = false;
+  let isDesktop = window.matchMedia(MOBILE_BREAKPOINT).matches;
+
+  // Debounce helper function
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+
+  // Update isDesktop on resize (debounced)
+  const handleResize = debounce(() => {
+    isDesktop = window.matchMedia(MOBILE_BREAKPOINT).matches;
+    
+    // Reset sidebar state on resize
+    if (isDesktop) {
+      closeSidebarCompletely();
+      collapseSidebar();
+    } else {
+      elements.mainContent.style.marginLeft = '0';
+    }
+  }, 150);
+
+  window.addEventListener('resize', handleResize);
 
   // Helper function to collapse sidebar
   function collapseSidebar() {
-    if (elements.mainContent) {
+    if (isDesktop && elements.mainContent) {
       elements.mainContent.style.marginLeft = SIDEBAR_COLLAPSED_WIDTH;
     }
   }
 
-  // Sidebar hover effect for content shift
+  // Helper function to expand sidebar
+  function expandSidebar() {
+    if (isDesktop && elements.mainContent) {
+      elements.mainContent.style.marginLeft = SIDEBAR_EXPANDED_WIDTH;
+    }
+  }
+
+  // Helper function to completely close sidebar (removes open state)
+  function closeSidebarCompletely() {
+    sidebarToggled = false;
+    elements.sidebar.classList.remove('open');
+    elements.sidebarBackdrop.classList.remove('show');
+  }
+
+  // Toggle sidebar
+  function toggleSidebar() {
+    sidebarToggled = !sidebarToggled;
+    
+    if (sidebarToggled) {
+      elements.sidebar.classList.add('open');
+      if (!isDesktop) {
+        elements.sidebarBackdrop.classList.add('show');
+      } else {
+        expandSidebar();
+      }
+    } else {
+      elements.sidebar.classList.remove('open');
+      elements.sidebarBackdrop.classList.remove('show');
+      if (isDesktop) {
+        collapseSidebar();
+      }
+    }
+  }
+
+  // Hamburger button click
+  if (elements.hamburgerBtn) {
+    elements.hamburgerBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleSidebar();
+    });
+  }
+
+  // Sidebar backdrop click
+  if (elements.sidebarBackdrop) {
+    elements.sidebarBackdrop.addEventListener('click', () => {
+      closeSidebarCompletely();
+    });
+  }
+
+  // Sidebar hover effect for content shift (desktop only with hover capability)
   if (elements.sidebar && elements.mainContent) {
     elements.sidebar.addEventListener('mouseenter', () => {
-      elements.mainContent.style.marginLeft = SIDEBAR_EXPANDED_WIDTH;
+      // Check hover capability dynamically
+      const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      if (hasHover && isDesktop && !sidebarToggled) {
+        expandSidebar();
+      }
     });
     
     elements.sidebar.addEventListener('mouseleave', () => {
-      elements.mainContent.style.marginLeft = SIDEBAR_COLLAPSED_WIDTH;
+      // Check hover capability dynamically
+      const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      if (hasHover && isDesktop && !sidebarToggled) {
+        collapseSidebar();
+      }
     });
+  }
+
+  // Initialize sidebar state
+  if (isDesktop) {
+    collapseSidebar();
   }
 
   // Utility: Show loader
@@ -165,6 +262,12 @@
         item.style.cursor = 'pointer';
         item.addEventListener('click', () => {
           hideNotificationModal();
+          
+          // Close sidebar if toggled open
+          if (sidebarToggled) {
+            closeSidebarCompletely();
+          }
+          
           collapseSidebar();
           showView(route);
           
@@ -312,6 +415,11 @@
       const route = link.dataset.route;
       if (!route) return;
 
+      // Close sidebar if toggled open
+      if (sidebarToggled) {
+        closeSidebarCompletely();
+      }
+      
       collapseSidebar();
       showView(route);
 
@@ -331,6 +439,11 @@
     card.addEventListener('click', (e) => {
       const route = card.dataset.route;
       if (!route) return;
+
+      // Close sidebar if toggled open
+      if (sidebarToggled) {
+        closeSidebarCompletely();
+      }
 
       collapseSidebar();
 
@@ -353,6 +466,12 @@
   if (elements.homeBrand) {
     elements.homeBrand.addEventListener('click', (e) => {
       e.preventDefault();
+      
+      // Close sidebar if toggled open
+      if (sidebarToggled) {
+        closeSidebarCompletely();
+      }
+      
       collapseSidebar();
       showView('dashboard');
       renderDashboard();
