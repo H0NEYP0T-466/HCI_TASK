@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LGU Student Portal - Login</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-3">
+                    <div class="logo">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>LGU</span>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <nav class="main-nav">
+                        <ul>
+                            <li><a href="index.html" class="active">Home</a></li>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#academics">Academics</a></li>
+                            <li><a href="#admissions">Admissions</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center hero-content">
+                    <h1 class="hero-title">Lahore Garrison University</h1>
+                    <p class="hero-subtitle">Student Portal - Your Gateway to Academic Excellence</p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-users"></i>
+                            <h3>10,000+</h3>
+                            <p>Students</p>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-book"></i>
+                            <h3>50+</h3>
+                            <p>Programs</p>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-award"></i>
+                            <h3>95%</h3>
+                            <p>Success Rate</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Section -->
+    <section class="login-section" id="login">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-5">
+                    <div class="login-card">
+                        <div class="login-header">
+                            <i class="fas fa-user-circle"></i>
+                            <h2>Student Login</h2>
+                            <p>Access your account</p>
+                        </div>
+                        <form id="loginForm" class="login-form">
+                            <div class="form-group mb-3">
+                                <label for="studentId">
+                                    <i class="fas fa-id-card"></i> Student ID
+                                </label>
+                                <input type="text" class="form-control" id="studentId" placeholder="Enter your Student ID" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="password">
+                                    <i class="fas fa-lock"></i> Password
+                                </label>
+                                <div class="password-input">
+                                    <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                                    <span class="toggle-password" onclick="togglePassword()">
+                                        <i class="fas fa-eye" id="toggleIcon"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="rememberMe">
+                                    <label class="form-check-label" for="rememberMe">
+                                        Remember me
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-login btn-block w-100">
+                                <i class="fas fa-sign-in-alt"></i> Login
+                            </button>
+                            <div class="login-links">
+                                <a href="#forgot">Forgot Password?</a>
+                                <a href="#register">New Student? Register</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <div class="section-title text-center">
+                <h2>Student Portal Features</h2>
+                <p>Everything you need in one place</p>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3>Academic Calendar</h3>
+                        <p>Stay updated with important dates, deadlines, and university events.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Grades & Results</h3>
+                        <p>Access your grades, transcripts, and academic performance instantly.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3>Course Registration</h3>
+                        <p>Register for courses and manage your academic schedule online.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <h3>Fee Management</h3>
+                        <p>View and pay your fees online with secure payment options.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3>Library Resources</h3>
+                        <p>Access digital library, e-books, and research materials online.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>Communication</h3>
+                        <p>Connect with faculty and peers through integrated messaging.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Announcements Section -->
+    <section class="announcements-section" id="announcements">
+        <div class="container">
+            <div class="section-title text-center">
+                <h2>Latest Announcements</h2>
+                <p>Stay informed with recent updates</p>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="announcement-card">
+                        <div class="announcement-date">
+                            <span class="day">14</span>
+                            <span class="month">DEC</span>
+                        </div>
+                        <div class="announcement-content">
+                            <h4>Final Examination Schedule</h4>
+                            <p>The final examination schedule for Fall 2024 semester has been uploaded to the portal. Students are requested to check their respective schedules.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="announcement-card">
+                        <div class="announcement-date">
+                            <span class="day">10</span>
+                            <span class="month">DEC</span>
+                        </div>
+                        <div class="announcement-content">
+                            <h4>Spring Semester Registration</h4>
+                            <p>Registration for Spring 2025 semester will commence from December 20, 2024. All students must register through the online portal.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="announcement-card">
+                        <div class="announcement-date">
+                            <span class="day">05</span>
+                            <span class="month">DEC</span>
+                        </div>
+                        <div class="announcement-content">
+                            <h4>Career Development Workshop</h4>
+                            <p>A career development workshop will be conducted on December 18, 2024. Students from all departments are encouraged to participate.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="announcement-card">
+                        <div class="announcement-date">
+                            <span class="day">01</span>
+                            <span class="month">DEC</span>
+                        </div>
+                        <div class="announcement-content">
+                            <h4>Library Timings Update</h4>
+                            <p>During examination period, the library will remain open till 10:00 PM. Students can utilize extended hours for study purposes.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Links Section -->
+    <section class="quick-links-section">
+        <div class="container">
+            <div class="section-title text-center">
+                <h2>Quick Links</h2>
+                <p>Access important resources</p>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <a href="#" class="quick-link-card">
+                        <i class="fas fa-download"></i>
+                        <h4>Downloads</h4>
+                        <p>Forms & Documents</p>
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <a href="#" class="quick-link-card">
+                        <i class="fas fa-calendar"></i>
+                        <h4>Academic Calendar</h4>
+                        <p>Important Dates</p>
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <a href="#" class="quick-link-card">
+                        <i class="fas fa-question-circle"></i>
+                        <h4>Help & Support</h4>
+                        <p>Get Assistance</p>
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <a href="#" class="quick-link-card">
+                        <i class="fas fa-envelope"></i>
+                        <h4>Contact Us</h4>
+                        <p>Reach Out</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h4>About LGU</h4>
+                    <p>Lahore Garrison University is committed to providing quality education and fostering academic excellence through innovative teaching methods and comprehensive student support.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Admissions</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Academics</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Faculty</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Research</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Campus Life</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Sector C, DHA Phase VI, Lahore, Pakistan</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+92-42-111-747-424</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@lgu.edu.pk</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Mon - Fri: 8:00 AM - 5:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Lahore Garrison University. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>
