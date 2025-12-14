@@ -90,6 +90,20 @@
     }
   }
 
+  // Helper function to adjust content based on hover state after navigation
+  function adjustContentAfterNavigation() {
+    // Check if sidebar is currently being hovered
+    const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const isSidebarHovered = elements.sidebar.matches(':hover');
+    
+    // If sidebar is hovered, keep content expanded; otherwise collapse
+    if (hasHover && isDesktop && isSidebarHovered) {
+      expandSidebar();
+    } else {
+      collapseSidebar();
+    }
+  }
+
   // Helper function to completely close sidebar (removes open state)
   function closeSidebarCompletely() {
     sidebarToggled = false;
@@ -274,17 +288,7 @@
             closeSidebarCompletely();
           }
           
-          // Check if sidebar is currently being hovered
-          const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-          const isSidebarHovered = elements.sidebar.matches(':hover');
-          
-          // If sidebar is hovered, keep content expanded; otherwise collapse
-          if (hasHover && isDesktop && isSidebarHovered) {
-            expandSidebar();
-          } else {
-            collapseSidebar();
-          }
-          
+          adjustContentAfterNavigation();
           showView(route);
           
           // Render specific views
@@ -436,17 +440,7 @@
         closeSidebarCompletely();
       }
       
-      // Check if sidebar is currently being hovered
-      const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-      const isSidebarHovered = elements.sidebar.matches(':hover');
-      
-      // If sidebar is hovered, keep content expanded; otherwise collapse
-      if (hasHover && isDesktop && isSidebarHovered) {
-        expandSidebar();
-      } else {
-        collapseSidebar();
-      }
-      
+      adjustContentAfterNavigation();
       showView(route);
 
       // Render specific views
@@ -471,16 +465,7 @@
         closeSidebarCompletely();
       }
 
-      // Check if sidebar is currently being hovered
-      const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-      const isSidebarHovered = elements.sidebar.matches(':hover');
-      
-      // If sidebar is hovered, keep content expanded; otherwise collapse
-      if (hasHover && isDesktop && isSidebarHovered) {
-        expandSidebar();
-      } else {
-        collapseSidebar();
-      }
+      adjustContentAfterNavigation();
 
       // Only navigate if the route view exists
       if (views[route]) {
@@ -507,17 +492,7 @@
         closeSidebarCompletely();
       }
       
-      // Check if sidebar is currently being hovered
-      const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-      const isSidebarHovered = elements.sidebar.matches(':hover');
-      
-      // If sidebar is hovered, keep content expanded; otherwise collapse
-      if (hasHover && isDesktop && isSidebarHovered) {
-        expandSidebar();
-      } else {
-        collapseSidebar();
-      }
-      
+      adjustContentAfterNavigation();
       showView('dashboard');
       renderDashboard();
     });
