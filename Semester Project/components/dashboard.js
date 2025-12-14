@@ -137,7 +137,9 @@
     elements.sidebar.addEventListener('mouseenter', () => {
       // Check hover capability dynamically
       const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-      if (hasHover && isDesktop && !sidebarToggled) {
+      // Always expand sidebar on hover for desktop with hover capability
+      // Content should adjust regardless of toggle state
+      if (hasHover && isDesktop) {
         expandSidebar();
       }
     });
@@ -145,6 +147,7 @@
     elements.sidebar.addEventListener('mouseleave', () => {
       // Check hover capability dynamically
       const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      // Only collapse if not explicitly toggled open
       if (hasHover && isDesktop && !sidebarToggled) {
         collapseSidebar();
       }
