@@ -18,7 +18,7 @@
             <a class="navbar-brand" href="index.html">
                 <i class="fas fa-graduation-cap"></i> LGU Portal
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -451,15 +451,16 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-hover">
+                                <caption class="visually-hidden">Semester grades for Fall 2024</caption>
                                 <thead>
                                     <tr>
-                                        <th>Course Code</th>
-                                        <th>Course Name</th>
-                                        <th>Credit Hours</th>
-                                        <th>Mid-Term</th>
-                                        <th>Final</th>
-                                        <th>Total</th>
-                                        <th>Grade</th>
+                                        <th scope="col">Course Code</th>
+                                        <th scope="col">Course Name</th>
+                                        <th scope="col">Credit Hours</th>
+                                        <th scope="col">Mid-Term</th>
+                                        <th scope="col">Final</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col">Grade</th>
                                     </tr>
                                 </thead>
                                 <tbody>

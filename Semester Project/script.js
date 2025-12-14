@@ -171,6 +171,7 @@ function loadUserData() {
     // Update user name in navbar
     const userDropdown = document.getElementById('userDropdown');
     if (userDropdown) {
+        userDropdown.textContent = '';
         userDropdown.innerHTML = `<i class="fas fa-user-circle"></i> ${userName}`;
     }
 }
@@ -399,6 +400,9 @@ function exportToCSV(data, filename) {
 }
 
 function convertToCSV(data) {
+    if (!data || data.length === 0) {
+        return '';
+    }
     const headers = Object.keys(data[0]);
     const rows = data.map(obj => headers.map(header => obj[header]));
     
@@ -444,6 +448,8 @@ document.addEventListener('DOMContentLoaded', animateOnScroll);
 // ===========================
 // Console Message
 // ===========================
-console.log('%cLGU Student Portal', 'color: #1e3a8a; font-size: 24px; font-weight: bold;');
-console.log('%cWelcome to Lahore Garrison University Student Portal', 'color: #3b82f6; font-size: 14px;');
-console.log('%cVersion 1.0.0', 'color: #6b7280; font-size: 12px;');
+if (typeof console !== 'undefined' && console.log) {
+    console.log('%cLGU Student Portal', 'color: #1e3a8a; font-size: 24px; font-weight: bold;');
+    console.log('%cWelcome to Lahore Garrison University Student Portal', 'color: #3b82f6; font-size: 14px;');
+    console.log('%cVersion 1.0.0', 'color: #6b7280; font-size: 12px;');
+}
