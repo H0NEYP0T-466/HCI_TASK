@@ -39,10 +39,11 @@
   // Sidebar dimensions
   const SIDEBAR_COLLAPSED_WIDTH = '72px';
   const SIDEBAR_EXPANDED_WIDTH = '260px';
+  const MOBILE_BREAKPOINT = '(min-width: 769px)';
 
   // Sidebar state management
   let sidebarToggled = false;
-  let isDesktop = window.matchMedia('(min-width: 769px)').matches;
+  let isDesktop = window.matchMedia(MOBILE_BREAKPOINT).matches;
 
   // Debounce helper function
   function debounce(func, wait) {
@@ -59,13 +60,11 @@
 
   // Update isDesktop on resize (debounced)
   const handleResize = debounce(() => {
-    isDesktop = window.matchMedia('(min-width: 769px)').matches;
+    isDesktop = window.matchMedia(MOBILE_BREAKPOINT).matches;
     
     // Reset sidebar state on resize
     if (isDesktop) {
-      elements.sidebar.classList.remove('open');
-      elements.sidebarBackdrop.classList.remove('show');
-      sidebarToggled = false;
+      closeSidebarCompletely();
       collapseSidebar();
     } else {
       elements.mainContent.style.marginLeft = '0';
@@ -86,6 +85,13 @@
     if (isDesktop && elements.mainContent) {
       elements.mainContent.style.marginLeft = SIDEBAR_EXPANDED_WIDTH;
     }
+  }
+
+  // Helper function to completely close sidebar (removes open state)
+  function closeSidebarCompletely() {
+    sidebarToggled = false;
+    elements.sidebar.classList.remove('open');
+    elements.sidebarBackdrop.classList.remove('show');
   }
 
   // Toggle sidebar
@@ -119,9 +125,7 @@
   // Sidebar backdrop click
   if (elements.sidebarBackdrop) {
     elements.sidebarBackdrop.addEventListener('click', () => {
-      sidebarToggled = false;
-      elements.sidebar.classList.remove('open');
-      elements.sidebarBackdrop.classList.remove('show');
+      closeSidebarCompletely();
     });
   }
 
@@ -261,9 +265,7 @@
           
           // Close sidebar if toggled open
           if (sidebarToggled) {
-            sidebarToggled = false;
-            elements.sidebar.classList.remove('open');
-            elements.sidebarBackdrop.classList.remove('show');
+            closeSidebarCompletely();
           }
           
           collapseSidebar();
@@ -415,9 +417,7 @@
 
       // Close sidebar if toggled open
       if (sidebarToggled) {
-        sidebarToggled = false;
-        elements.sidebar.classList.remove('open');
-        elements.sidebarBackdrop.classList.remove('show');
+        closeSidebarCompletely();
       }
       
       collapseSidebar();
@@ -442,9 +442,7 @@
 
       // Close sidebar if toggled open
       if (sidebarToggled) {
-        sidebarToggled = false;
-        elements.sidebar.classList.remove('open');
-        elements.sidebarBackdrop.classList.remove('show');
+        closeSidebarCompletely();
       }
 
       collapseSidebar();
@@ -471,9 +469,7 @@
       
       // Close sidebar if toggled open
       if (sidebarToggled) {
-        sidebarToggled = false;
-        elements.sidebar.classList.remove('open');
-        elements.sidebarBackdrop.classList.remove('show');
+        closeSidebarCompletely();
       }
       
       collapseSidebar();
