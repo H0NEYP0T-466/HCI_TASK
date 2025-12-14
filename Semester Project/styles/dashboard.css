@@ -41,7 +41,6 @@ body {
 .navbar-content {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   width: 100%;
   max-width: 100%;
   gap: 16px;
@@ -101,6 +100,7 @@ body {
   display: flex;
   align-items: center;
   gap: 16px;
+  margin-left: auto;
 }
 
 .student-badge {
@@ -283,7 +283,9 @@ body {
   flex: 1;
   padding: 24px;
   margin-left: 72px;
-  transition: margin-left 0.3s ease;
+  min-width: 0;
+  width: calc(100% - 72px);
+  transition: margin-left 0.3s ease, width 0.3s ease;
 }
 
 /* Dashboard Cards */
@@ -764,6 +766,7 @@ td {
   .main-content {
     margin-left: 0;
     padding: 16px;
+    width: 100%;
   }
 
   .sidebar {
