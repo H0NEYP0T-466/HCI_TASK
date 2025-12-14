@@ -31,6 +31,8 @@
     homeBrand: document.getElementById('homeBrand'),
     loader: document.getElementById('loader'),
     sidebar: document.getElementById('sidebar'),
+    sidebarBackdrop: document.getElementById('sidebarBackdrop'),
+    hamburgerBtn: document.getElementById('hamburgerBtn'),
     mainContent: document.querySelector('.main-content')
   };
 
@@ -38,22 +40,99 @@
   const SIDEBAR_COLLAPSED_WIDTH = '72px';
   const SIDEBAR_EXPANDED_WIDTH = '260px';
 
+  // Sidebar state management
+  let sidebarToggled = false;
+  let isDesktop = window.matchMedia('(min-width: 769px)').matches;
+
+  // Update isDesktop on resize
+  window.addEventListener('resize', () => {
+    isDesktop = window.matchMedia('(min-width: 769px)').matches;
+    
+    // Reset sidebar state on resize
+    if (isDesktop) {
+      elements.sidebar.classList.remove('open');
+      elements.sidebarBackdrop.classList.remove('show');
+      sidebarToggled = false;
+      collapseSidebar();
+    } else {
+      elements.mainContent.style.marginLeft = '0';
+    }
+  });
+
   // Helper function to collapse sidebar
   function collapseSidebar() {
-    if (elements.mainContent) {
+    if (isDesktop && elements.mainContent) {
       elements.mainContent.style.marginLeft = SIDEBAR_COLLAPSED_WIDTH;
     }
   }
 
-  // Sidebar hover effect for content shift
-  if (elements.sidebar && elements.mainContent) {
-    elements.sidebar.addEventListener('mouseenter', () => {
+  // Helper function to expand sidebar
+  function expandSidebar() {
+    if (isDesktop && elements.mainContent) {
       elements.mainContent.style.marginLeft = SIDEBAR_EXPANDED_WIDTH;
-    });
+    }
+  }
+
+  // Toggle sidebar
+  function toggleSidebar() {
+    sidebarToggled = !sidebarToggled;
     
-    elements.sidebar.addEventListener('mouseleave', () => {
-      elements.mainContent.style.marginLeft = SIDEBAR_COLLAPSED_WIDTH;
+    if (sidebarToggled) {
+      elements.sidebar.classList.add('open');
+      if (!isDesktop) {
+        elements.sidebarBackdrop.classList.add('show');
+      } else {
+        expandSidebar();
+      }
+    } else {
+      elements.sidebar.classList.remove('open');
+      elements.sidebarBackdrop.classList.remove('show');
+      if (isDesktop) {
+        collapseSidebar();
+      }
+    }
+  }
+
+  // Hamburger button click
+  if (elements.hamburgerBtn) {
+    elements.hamburgerBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleSidebar();
     });
+  }
+
+  // Sidebar backdrop click
+  if (elements.sidebarBackdrop) {
+    elements.sidebarBackdrop.addEventListener('click', () => {
+      sidebarToggled = false;
+      elements.sidebar.classList.remove('open');
+      elements.sidebarBackdrop.classList.remove('show');
+    });
+  }
+
+  // Sidebar hover effect for content shift (desktop only with hover capability)
+  if (elements.sidebar && elements.mainContent) {
+    // Only add hover listeners on devices with hover capability
+    const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    
+    if (hasHover) {
+      elements.sidebar.addEventListener('mouseenter', () => {
+        if (isDesktop && !sidebarToggled) {
+          expandSidebar();
+        }
+      });
+      
+      elements.sidebar.addEventListener('mouseleave', () => {
+        if (isDesktop && !sidebarToggled) {
+          collapseSidebar();
+        }
+      });
+    }
+  }
+
+  // Initialize sidebar state
+  if (isDesktop) {
+    collapseSidebar();
   }
 
   // Utility: Show loader
@@ -165,6 +244,14 @@
         item.style.cursor = 'pointer';
         item.addEventListener('click', () => {
           hideNotificationModal();
+          
+          // Close sidebar if toggled open
+          if (sidebarToggled) {
+            sidebarToggled = false;
+            elements.sidebar.classList.remove('open');
+            elements.sidebarBackdrop.classList.remove('show');
+          }
+          
           collapseSidebar();
           showView(route);
           
@@ -312,6 +399,13 @@
       const route = link.dataset.route;
       if (!route) return;
 
+      // Close sidebar if toggled open
+      if (sidebarToggled) {
+        sidebarToggled = false;
+        elements.sidebar.classList.remove('open');
+        elements.sidebarBackdrop.classList.remove('show');
+      }
+      
       collapseSidebar();
       showView(route);
 
@@ -331,6 +425,13 @@
     card.addEventListener('click', (e) => {
       const route = card.dataset.route;
       if (!route) return;
+
+      // Close sidebar if toggled open
+      if (sidebarToggled) {
+        sidebarToggled = false;
+        elements.sidebar.classList.remove('open');
+        elements.sidebarBackdrop.classList.remove('show');
+      }
 
       collapseSidebar();
 
@@ -353,6 +454,14 @@
   if (elements.homeBrand) {
     elements.homeBrand.addEventListener('click', (e) => {
       e.preventDefault();
+      
+      // Close sidebar if toggled open
+      if (sidebarToggled) {
+        sidebarToggled = false;
+        elements.sidebar.classList.remove('open');
+        elements.sidebarBackdrop.classList.remove('show');
+      }
+      
       collapseSidebar();
       showView('dashboard');
       renderDashboard();

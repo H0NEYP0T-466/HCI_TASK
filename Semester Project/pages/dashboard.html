@@ -14,6 +14,9 @@
   <!-- Top Navbar -->
   <nav class="navbar">
     <div class="navbar-content">
+      <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle Sidebar">
+        <i class="fa-solid fa-bars"></i>
+      </button>
       <a href="#" class="navbar-brand" id="homeBrand">
         <img src="../assets/lgu.png" alt="LGU Logo" class="lgu-logo" />
         <div class="brand-text">
@@ -36,6 +39,9 @@
 
   <!-- Layout Container -->
   <div class="layout-container">
+    <!-- Sidebar Backdrop for Mobile -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    
     <!-- Sidebar - Hidden by default, shows on hover -->
     <aside class="sidebar" id="sidebar" tabindex="0">
       <div class="sidebar-header">
