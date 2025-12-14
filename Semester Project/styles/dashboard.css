@@ -104,7 +104,8 @@ body {
 }
 
 .icon-btn:hover {
-  background: var(--light-bg);
+  background-color: var(--light-bg);
+  transition: background-color 0.2s ease;
 }
 
 .notif-badge {

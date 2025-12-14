@@ -6,7 +6,7 @@
   // Auth guard
   const isAuth = localStorage.getItem('isAuthenticated') === 'true';
   if (!isAuth) {
-    window.location.href = 'login.html';
+    window.location.href = '../pages/login.html';
     return;
   }
 
@@ -135,7 +135,7 @@
       localStorage.removeItem('isAuthenticated');
       showLoader(300);
       setTimeout(() => {
-        window.location.href = 'login.html';
+        window.location.href = '../pages/login.html';
       }, 300);
     });
   }
