@@ -38,6 +38,13 @@
   const SIDEBAR_COLLAPSED_WIDTH = '72px';
   const SIDEBAR_EXPANDED_WIDTH = '260px';
 
+  // Helper function to collapse sidebar
+  function collapseSidebar() {
+    if (elements.mainContent) {
+      elements.mainContent.style.marginLeft = SIDEBAR_COLLAPSED_WIDTH;
+    }
+  }
+
   // Sidebar hover effect for content shift
   if (elements.sidebar && elements.mainContent) {
     elements.sidebar.addEventListener('mouseenter', () => {
@@ -158,12 +165,7 @@
         item.style.cursor = 'pointer';
         item.addEventListener('click', () => {
           hideNotificationModal();
-          
-          // Collapse sidebar after navigation
-          if (elements.mainContent) {
-            elements.mainContent.style.marginLeft = SIDEBAR_COLLAPSED_WIDTH;
-          }
-          
+          collapseSidebar();
           showView(route);
           
           // Render specific views
@@ -310,11 +312,7 @@
       const route = link.dataset.route;
       if (!route) return;
 
-      // Collapse sidebar after navigation
-      if (elements.mainContent) {
-        elements.mainContent.style.marginLeft = SIDEBAR_COLLAPSED_WIDTH;
-      }
-
+      collapseSidebar();
       showView(route);
 
       // Render specific views
@@ -334,10 +332,7 @@
       const route = card.dataset.route;
       if (!route) return;
 
-      // Collapse sidebar after navigation
-      if (elements.mainContent) {
-        elements.mainContent.style.marginLeft = SIDEBAR_COLLAPSED_WIDTH;
-      }
+      collapseSidebar();
 
       // Only navigate if the route view exists
       if (views[route]) {
@@ -358,12 +353,7 @@
   if (elements.homeBrand) {
     elements.homeBrand.addEventListener('click', (e) => {
       e.preventDefault();
-      
-      // Collapse sidebar after navigation
-      if (elements.mainContent) {
-        elements.mainContent.style.marginLeft = SIDEBAR_COLLAPSED_WIDTH;
-      }
-      
+      collapseSidebar();
       showView('dashboard');
       renderDashboard();
     });
