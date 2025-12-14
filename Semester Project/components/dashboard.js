@@ -38,6 +38,13 @@
   const SIDEBAR_COLLAPSED_WIDTH = '72px';
   const SIDEBAR_EXPANDED_WIDTH = '260px';
 
+  // Helper function to collapse sidebar
+  function collapseSidebar() {
+    if (elements.mainContent) {
+      elements.mainContent.style.marginLeft = SIDEBAR_COLLAPSED_WIDTH;
+    }
+  }
+
   // Sidebar hover effect for content shift
   if (elements.sidebar && elements.mainContent) {
     elements.sidebar.addEventListener('mouseenter', () => {
@@ -158,6 +165,7 @@
         item.style.cursor = 'pointer';
         item.addEventListener('click', () => {
           hideNotificationModal();
+          collapseSidebar();
           showView(route);
           
           // Render specific views
@@ -304,6 +312,7 @@
       const route = link.dataset.route;
       if (!route) return;
 
+      collapseSidebar();
       showView(route);
 
       // Render specific views
@@ -322,6 +331,8 @@
     card.addEventListener('click', (e) => {
       const route = card.dataset.route;
       if (!route) return;
+
+      collapseSidebar();
 
       // Only navigate if the route view exists
       if (views[route]) {
@@ -342,6 +353,7 @@
   if (elements.homeBrand) {
     elements.homeBrand.addEventListener('click', (e) => {
       e.preventDefault();
+      collapseSidebar();
       showView('dashboard');
       renderDashboard();
     });
@@ -524,11 +536,6 @@
         <td><span class="badge ${ch.status === 'Paid' ? 'badge-success' : 'badge-warning'}">${ch.status}</span></td>
         <td>${ch.issueDate}</td>
         <td>${ch.dueDate}</td>
-        <td>
-          <button class="btn-primary" style="padding: 6px 12px; font-size: 13px;">
-            <i class="fa-solid fa-print"></i> Print
-          </button>
-        </td>
       `;
       tbody.appendChild(tr);
     });
