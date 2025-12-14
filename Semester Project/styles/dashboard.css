@@ -8,9 +8,8 @@
   --border-color: #e0e0e0;
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
-  --warning-color: #ff9800;
-  --warning-bg: rgba(255, 152, 0, 0.1);
-  --accent-outstanding: #f5a623;
+  --warning-color: #f5a623;
+  --warning-bg: rgba(245, 166, 35, 0.1);
 }
 
 * {
