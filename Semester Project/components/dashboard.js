@@ -18,6 +18,10 @@
     notificationCard: document.getElementById('notificationCard'),
     closeNotifications: document.getElementById('closeNotifications'),
     notificationBody: document.getElementById('notificationBody'),
+    notificationModal: document.getElementById('notificationModal'),
+    notificationModalBody: document.getElementById('notificationModalBody'),
+    closeNotificationModal: document.getElementById('closeNotificationModal'),
+    notificationBackdrop: document.getElementById('notificationBackdrop'),
     logoutBtn: document.getElementById('logoutBtn'),
     logoutLink: document.getElementById('logoutLink'),
     logoutModal: document.getElementById('logoutModal'),
@@ -101,6 +105,101 @@
       elements.notificationBody.appendChild(item);
     });
   }
+
+  // Render notifications in modal
+  function renderNotificationsModal() {
+    const notifications = window.SampleData?.notifications || [];
+    elements.notificationModalBody.innerHTML = '';
+
+    if (notifications.length === 0) {
+      elements.notificationModalBody.innerHTML = `
+        <div class="notification-empty">
+          <i class="fa-regular fa-bell-slash" style="font-size: 48px; color: #ccc; margin-bottom: 16px;"></i>
+          <p>No notifications</p>
+        </div>
+      `;
+      return;
+    }
+
+    notifications.forEach(notif => {
+      const item = document.createElement('div');
+      item.className = 'notification-item';
+      
+      // Check if notification relates to a specific route
+      let route = null;
+      if (notif.text.toLowerCase().includes('attendance')) route = 'attendance';
+      else if (notif.text.toLowerCase().includes('fee') || notif.text.toLowerCase().includes('challan')) route = 'fee';
+      else if (notif.text.toLowerCase().includes('course')) route = 'courses';
+      else if (notif.text.toLowerCase().includes('calendar')) route = 'calendar';
+      
+      item.innerHTML = `
+        <div class="notification-text">${notif.text}</div>
+        <div class="notification-date">${notif.date}</div>
+      `;
+      
+      // Add click handler if route exists
+      if (route && views[route]) {
+        item.style.cursor = 'pointer';
+        item.addEventListener('click', () => {
+          hideNotificationModal();
+          showView(route);
+          
+          // Render specific views
+          if (route === 'attendance') renderAttendance();
+          if (route === 'courses') renderCourses();
+          if (route === 'fee') renderChallans();
+          if (route === 'calendar') renderCalendar();
+        });
+      }
+      
+      elements.notificationModalBody.appendChild(item);
+    });
+  }
+
+  // Show/hide notification modal
+  function showNotificationModal() {
+    renderNotificationsModal();
+    elements.notificationModal.classList.add('show');
+  }
+
+  function hideNotificationModal() {
+    elements.notificationModal.classList.remove('show');
+  }
+
+  // Close notification modal handlers
+  if (elements.closeNotificationModal) {
+    elements.closeNotificationModal.addEventListener('click', hideNotificationModal);
+  }
+
+  if (elements.notificationBackdrop) {
+    elements.notificationBackdrop.addEventListener('click', hideNotificationModal);
+  }
+
+  // Auto-show notification modal once per session
+  const notificationsShown = sessionStorage.getItem('notificationsShown');
+  const NOTIFICATION_DELAY = 500; // Delay before showing notification modal
+  if (!notificationsShown) {
+    // Show modal after a brief delay
+    setTimeout(() => {
+      showNotificationModal();
+      sessionStorage.setItem('notificationsShown', 'true');
+    }, NOTIFICATION_DELAY);
+  }
+
+  // Keyboard accessibility - Escape key to close modals
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' || e.keyCode === 27) {
+      if (elements.notificationModal.classList.contains('show')) {
+        hideNotificationModal();
+      }
+      if (elements.logoutModal.classList.contains('show')) {
+        hideLogoutModal();
+      }
+      if (elements.notificationCard.classList.contains('show')) {
+        elements.notificationCard.classList.remove('show');
+      }
+    }
+  });
 
   // Logout functionality
   function showLogoutModal() {
@@ -201,6 +300,28 @@
     });
   });
 
+  // Stat card click handlers
+  const statCards = document.querySelectorAll('.stat-card[data-route]');
+  statCards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      const route = card.dataset.route;
+      if (!route) return;
+
+      // Only navigate if the route view exists
+      if (views[route]) {
+        showView(route);
+        
+        // Render specific views
+        if (route === 'dashboard') renderDashboard();
+        if (route === 'attendance') renderAttendance();
+        if (route === 'courses') renderCourses();
+        if (route === 'fee') renderChallans();
+        if (route === 'calendar') renderCalendar();
+        if (route === 'profile') renderProfile();
+      }
+    });
+  });
+
   // Home brand click
   if (elements.homeBrand) {
     elements.homeBrand.addEventListener('click', (e) => {
@@ -214,7 +335,7 @@
   function renderDashboard() {
     const s = window.SampleData.student;
     document.getElementById('enrolledSemester').textContent = s.session;
-    document.getElementById('outstandingFee').textContent = s.outstanding.toLocaleString();
+    document.getElementById('outstandingFee').textContent = s.outstanding;
     document.getElementById('cgpa').textContent = s.cgpa.toFixed(2);
     document.getElementById('classSection').textContent = s.section;
 

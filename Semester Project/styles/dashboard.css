@@ -8,8 +8,8 @@
   --border-color: #e0e0e0;
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
-  --warning-color: #ff9800;
-  --warning-bg: rgba(255, 152, 0, 0.1);
+  --warning-color: #f5a623;
+  --warning-bg: rgba(245, 166, 35, 0.1);
 }
 
 * {
@@ -151,7 +151,7 @@ body {
   position: fixed;
   left: 0;
   top: 64px;
-  width: 72px;
+  width: 64px;
   height: calc(100vh - 64px);
   background: var(--white);
   border-right: 1px solid var(--border-color);
@@ -161,8 +161,9 @@ body {
   z-index: 900;
 }
 
-.sidebar:hover {
-  width: 260px;
+.sidebar:hover,
+.sidebar:focus-within {
+  width: 240px;
   box-shadow: var(--shadow-md);
 }
 
@@ -252,7 +253,7 @@ body {
 .main-content {
   flex: 1;
   padding: 24px;
-  margin-left: 72px;
+  margin-left: 64px;
   transition: margin-left 0.3s ease;
 }
 
@@ -284,6 +285,7 @@ body {
   align-items: center;
   gap: 16px;
   transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
 }
 
 .stat-card:hover {
@@ -472,6 +474,56 @@ td {
 
 .notification-card.show {
   display: block;
+}
+
+/* Notification Modal - Centered */
+.notification-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1100;
+  align-items: center;
+  justify-content: center;
+}
+
+.notification-modal.show {
+  display: flex;
+}
+
+.modal-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.notification-modal-content {
+  position: relative;
+  background: var(--white);
+  border-radius: 12px;
+  width: min(600px, 90vw);
+  max-height: 80vh;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  overflow: hidden;
+  animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @keyframes slideInRight {
@@ -670,11 +722,15 @@ td {
   }
 
   .sidebar {
-    transform: translateX(-100%);
+    width: 64px;
+    transform: translateX(0);
   }
 
-  .sidebar.mobile-open {
-    transform: translateX(0);
+  .sidebar:hover,
+  .sidebar:focus-within {
+    width: 240px;
+    /* Large box-shadow creates a backdrop effect for mobile */
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
   }
 
   .stats-grid {
@@ -688,6 +744,10 @@ td {
   .notification-card {
     width: calc(100% - 32px);
     right: 16px;
+  }
+  
+  .notification-modal-content {
+    width: min(600px, 95vw);
   }
 }
 

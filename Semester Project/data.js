@@ -3,9 +3,9 @@ window.SampleData = {
   student: {
     name: localStorage.getItem('studentName') || 'Shoaib Rafiq',
     roll: localStorage.getItem('rollNumber') || 'Fa-2023/BSCS/479',
-    session: 'Fa-2025',
+    session: 'Fa–2025',
     section: 'L',
-    cgpa: 2.89,
+    cgpa: 3.48,
     outstanding: 66528
   },
   attendance: {

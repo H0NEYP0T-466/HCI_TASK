@@ -37,7 +37,7 @@
   <!-- Layout Container -->
   <div class="layout-container">
     <!-- Sidebar - Hidden by default, shows on hover -->
-    <aside class="sidebar" id="sidebar">
+    <aside class="sidebar" id="sidebar" tabindex="0">
       <div class="sidebar-header">
         <img src="../assets/lgu.png" alt="LGU Logo" class="lgu-logo" />
         <div class="sidebar-title">LGU Portal</div>
@@ -87,42 +87,42 @@
 
         <!-- Stats Cards -->
         <div class="stats-grid">
-          <div class="stat-card">
+          <div class="stat-card" data-route="dashboard">
             <div class="stat-icon green">
-              <i class="fa-solid fa-calendar-days"></i>
+              <i class="fa-solid fa-book"></i>
             </div>
             <div class="stat-content">
-              <div class="stat-label">Enrolled Semester</div>
-              <div class="stat-value" id="enrolledSemester">Fa-2025</div>
+              <div class="stat-label">ENROLLED SEMESTER</div>
+              <div class="stat-value" id="enrolledSemester">Fa–2025</div>
             </div>
           </div>
 
-          <div class="stat-card">
+          <div class="stat-card" data-route="fee">
             <div class="stat-icon warning">
-              <i class="fa-solid fa-triangle-exclamation"></i>
+              <i class="fa-solid fa-money-bill-wave"></i>
             </div>
             <div class="stat-content">
-              <div class="stat-label">Outstanding</div>
-              <div class="stat-value" id="outstandingFee">66,528</div>
+              <div class="stat-label">OUTSTANDING</div>
+              <div class="stat-value" id="outstandingFee">66528</div>
             </div>
           </div>
 
-          <div class="stat-card">
+          <div class="stat-card" data-route="dashboard">
             <div class="stat-icon info">
               <i class="fa-solid fa-graduation-cap"></i>
             </div>
             <div class="stat-content">
               <div class="stat-label">CGPA</div>
-              <div class="stat-value" id="cgpa">2.89</div>
+              <div class="stat-value" id="cgpa">3.48</div>
             </div>
           </div>
 
-          <div class="stat-card">
+          <div class="stat-card" data-route="dashboard">
             <div class="stat-icon dark">
-              <i class="fa-solid fa-users"></i>
+              <i class="fa-solid fa-chalkboard-user"></i>
             </div>
             <div class="stat-content">
-              <div class="stat-label">Section</div>
+              <div class="stat-label">Class Section</div>
               <div class="stat-value" id="classSection">L</div>
             </div>
           </div>
@@ -333,6 +333,18 @@
         </div>
       </section>
     </main>
+  </div>
+
+  <!-- Notification Modal -->
+  <div class="notification-modal" id="notificationModal">
+    <div class="modal-backdrop" id="notificationBackdrop"></div>
+    <div class="notification-modal-content">
+      <div class="notification-header">
+        <h3>Notifications</h3>
+        <button class="btn-close" id="closeNotificationModal" aria-label="Close">×</button>
+      </div>
+      <div class="notification-body" id="notificationModalBody"></div>
+    </div>
   </div>
 
   <!-- Notification Card -->
