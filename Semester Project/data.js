@@ -10,23 +10,31 @@ window.SampleData = {
   },
   attendance: {
     subjects: [
-      { code: 'AI-TH', name: 'Artificial Intelligence Theory', percent: 96 },
-      { code: 'AI-Lab', name: 'Artificial Intelligence Lab', percent: 92 },
-      { code: 'CA-TH', name: 'Computer Architecture Theory', percent: 88 },
-      { code: 'DIP-TH', name: 'Digital Image Processing Theory', percent: 91 },
-      { code: 'H&CG-Lab', name: 'HCI & Computer Graphics Lab', percent: 85 },
-      { code: 'OS-TH', name: 'Operating Systems Theory', percent: 87 },
-      { code: 'SE-TH', name: 'Software Engineering Theory', percent: 89 }
+      { code: 'DIP-TH', name: 'DIP Theory', percent: 91 },
+      { code: 'DIP-Lab', name: 'DIP Lab', percent: 88 },
+      { code: 'HCI-TH', name: 'HCI Theory', percent: 85 },
+      { code: 'HCI-Lab', name: 'HCI Lab', percent: 90 },
+      { code: 'CA-TH', name: 'CA Theory', percent: 88 },
+      { code: 'CA-Lab', name: 'CA Lab', percent: 86 },
+      { code: 'AI-TH', name: 'AI Theory', percent: 96 },
+      { code: 'AI-Lab', name: 'AI Lab', percent: 92 },
+      { code: 'SE-TH', name: 'SE Theory', percent: 89 },
+      { code: 'OS-Lab', name: 'OS Lab', percent: 84 },
+      { code: 'OS-TH', name: 'OS Theory', percent: 87 }
     ]
   },
   courses: [
-    { code: 'AI', name: 'Artificial Intelligence Sec 12', teacher: 'Mr. Muhammad Sadat Amir Khan', section: 'L' },
-    { code: 'AI-Lab', name: 'Artificial Intelligence Sec 12', teacher: 'Zainab Zafar', section: 'L' },
-    { code: 'CA', name: 'Computer Architecture Sec 12', teacher: 'Mr. Husnain Ali', section: 'L' },
-    { code: 'CA2', name: 'Computer Architecture Sec 12', teacher: 'Ahsan Raza', section: 'L' },
-    { code: 'DIP', name: 'Digital Image Processing Sec 2', teacher: 'Aisha Riaz', section: 'L' },
-    { code: 'DIP2', name: 'Digital Image Processing Sec 2', teacher: 'Aisha Riaz', section: 'L' },
-    { code: 'HCG', name: 'HCI & Computer Graphics Sec 12', teacher: 'Mr. Husnain Ali', section: 'L' }
+    { code: 'DIP-TH', name: 'DIP Theory', teacher: 'Dr. Aisha Riaz', section: 'L' },
+    { code: 'DIP-Lab', name: 'DIP Lab', teacher: 'Ms. Zainab Zafar', section: 'L' },
+    { code: 'HCI-TH', name: 'HCI Theory', teacher: 'Mr. Husnain Ali', section: 'L' },
+    { code: 'HCI-Lab', name: 'HCI Lab', teacher: 'Mr. Husnain Ali', section: 'L' },
+    { code: 'CA-TH', name: 'CA Theory', teacher: 'Dr. Muhammad Sadat Amir Khan', section: 'L' },
+    { code: 'CA-Lab', name: 'CA Lab', teacher: 'Mr. Ahsan Raza', section: 'L' },
+    { code: 'AI-TH', name: 'AI Theory', teacher: 'Dr. Muhammad Sadat Amir Khan', section: 'L' },
+    { code: 'AI-Lab', name: 'AI Lab', teacher: 'Ms. Zainab Zafar', section: 'L' },
+    { code: 'SE-TH', name: 'SE Theory', teacher: 'Dr. Usman Ahmed', section: 'L' },
+    { code: 'OS-Lab', name: 'OS Lab', teacher: 'Mr. Hassan Malik', section: 'L' },
+    { code: 'OS-TH', name: 'OS Theory', teacher: 'Dr. Fatima Noor', section: 'L' }
   ],
   calendar: [
     { activity: 'Enrollment Start', date: '08 Sep 2025' },
@@ -71,7 +79,9 @@ window.SampleData = {
     }
   ],
   notifications: [
-    { id: 1, text: 'New attendance updated for AI-TH', date: '2025-12-12' },
-    { id: 2, text: 'Fee challan generated for Fa-2025', date: '2025-12-09' }
+    { id: 1, text: 'From: academics@lgu.edu.pk - Your attendance for AI-TH has been updated. Current: 96%', date: '2025-12-12' },
+    { id: 2, text: 'From: finance@lgu.edu.pk - Fee challan for Fa-2025 installment-II is now available', date: '2025-12-09' },
+    { id: 3, text: 'From: registrar@lgu.edu.pk - Final exam schedule will be announced on December 20th', date: '2025-12-08' },
+    { id: 4, text: 'From: academics@lgu.edu.pk - Course evaluation forms are now open for all enrolled courses', date: '2025-12-05' }
   ]
 };

@@ -48,6 +48,7 @@
 
         <button type="submit" class="btn-login" id="loginBtn">
           <span id="loginText">Login</span>
+          <div class="spinner" id="loginSpinner" style="display: none;"></div>
         </button>
 
         <div id="errorMsg" class="error-message">
@@ -55,15 +56,18 @@
         </div>
       </form>
     </div>
-    
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-      <div class="loading-content">
-        <div class="spinner-large"></div>
-        <span class="loading-text">Logging in...</span>
-      </div>
-    </div>
   </div>
+
+  <style>
+    #loginSpinner {
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-top-color: var(--white);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+  </style>
 
   <script>
     // Roll pattern: fa-YY-program-XXX (case-insensitive)
@@ -94,10 +98,13 @@
       // Hide error if shown
       errorMsg.classList.remove('show');
 
-      // Show loading overlay
+      // Show loading state on button
       isSubmitting = true;
       loginBtn.disabled = true;
-      loadingOverlay.classList.add('show');
+      const loginText = document.getElementById('loginText');
+      const loginSpinner = document.getElementById('loginSpinner');
+      loginText.style.display = 'none';
+      loginSpinner.style.display = 'block';
 
       // Simulate realistic loading delay
       setTimeout(() => {

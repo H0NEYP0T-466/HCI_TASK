@@ -151,7 +151,7 @@ body {
   position: fixed;
   left: 0;
   top: 64px;
-  width: 64px;
+  width: 72px;
   height: calc(100vh - 64px);
   background: var(--white);
   border-right: 1px solid var(--border-color);
@@ -163,7 +163,7 @@ body {
 
 .sidebar:hover,
 .sidebar:focus-within {
-  width: 240px;
+  width: 260px;
   box-shadow: var(--shadow-md);
 }
 
@@ -253,8 +253,12 @@ body {
 .main-content {
   flex: 1;
   padding: 24px;
-  margin-left: 64px;
+  margin-left: 72px;
   transition: margin-left 0.3s ease;
+}
+
+.sidebar:hover ~ .main-content {
+  margin-left: 260px;
 }
 
 /* Dashboard Cards */
@@ -722,13 +726,13 @@ td {
   }
 
   .sidebar {
-    width: 64px;
+    width: 72px;
     transform: translateX(0);
   }
 
   .sidebar:hover,
   .sidebar:focus-within {
-    width: 240px;
+    width: 260px;
     /* Large box-shadow creates a backdrop effect for mobile */
     box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
   }

@@ -30,8 +30,20 @@
     confirmLogout: document.getElementById('confirmLogout'),
     homeBrand: document.getElementById('homeBrand'),
     loader: document.getElementById('loader'),
-    sidebar: document.getElementById('sidebar')
+    sidebar: document.getElementById('sidebar'),
+    mainContent: document.querySelector('.main-content')
   };
+
+  // Sidebar hover effect for content shift
+  if (elements.sidebar && elements.mainContent) {
+    elements.sidebar.addEventListener('mouseenter', () => {
+      elements.mainContent.style.marginLeft = '260px';
+    });
+    
+    elements.sidebar.addEventListener('mouseleave', () => {
+      elements.mainContent.style.marginLeft = '72px';
+    });
+  }
 
   // Utility: Show loader
   function showLoader(ms = 500) {
