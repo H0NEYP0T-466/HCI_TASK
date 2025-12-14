@@ -34,14 +34,18 @@
     mainContent: document.querySelector('.main-content')
   };
 
+  // Sidebar dimensions
+  const SIDEBAR_COLLAPSED_WIDTH = '72px';
+  const SIDEBAR_EXPANDED_WIDTH = '260px';
+
   // Sidebar hover effect for content shift
   if (elements.sidebar && elements.mainContent) {
     elements.sidebar.addEventListener('mouseenter', () => {
-      elements.mainContent.style.marginLeft = '260px';
+      elements.mainContent.style.marginLeft = SIDEBAR_EXPANDED_WIDTH;
     });
     
     elements.sidebar.addEventListener('mouseleave', () => {
-      elements.mainContent.style.marginLeft = '72px';
+      elements.mainContent.style.marginLeft = SIDEBAR_COLLAPSED_WIDTH;
     });
   }
 
