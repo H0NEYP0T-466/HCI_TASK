@@ -90,6 +90,20 @@
     }
   }
 
+  // Helper function to adjust content based on hover state after navigation
+  function adjustContentAfterNavigation() {
+    // Check if sidebar is currently being hovered
+    const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const isSidebarHovered = elements.sidebar.matches(':hover');
+    
+    // If sidebar is hovered, keep content expanded; otherwise collapse
+    if (hasHover && isDesktop && isSidebarHovered) {
+      expandSidebar();
+    } else {
+      collapseSidebar();
+    }
+  }
+
   // Helper function to completely close sidebar (removes open state)
   function closeSidebarCompletely() {
     sidebarToggled = false;
@@ -137,7 +151,9 @@
     elements.sidebar.addEventListener('mouseenter', () => {
       // Check hover capability dynamically
       const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-      if (hasHover && isDesktop && !sidebarToggled) {
+      // Always expand sidebar on hover for desktop with hover capability
+      // Content should adjust regardless of toggle state
+      if (hasHover && isDesktop) {
         expandSidebar();
       }
     });
@@ -145,6 +161,7 @@
     elements.sidebar.addEventListener('mouseleave', () => {
       // Check hover capability dynamically
       const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      // Only collapse if not explicitly toggled open
       if (hasHover && isDesktop && !sidebarToggled) {
         collapseSidebar();
       }
@@ -271,7 +288,7 @@
             closeSidebarCompletely();
           }
           
-          collapseSidebar();
+          adjustContentAfterNavigation();
           showView(route);
           
           // Render specific views
@@ -423,7 +440,7 @@
         closeSidebarCompletely();
       }
       
-      collapseSidebar();
+      adjustContentAfterNavigation();
       showView(route);
 
       // Render specific views
@@ -448,7 +465,7 @@
         closeSidebarCompletely();
       }
 
-      collapseSidebar();
+      adjustContentAfterNavigation();
 
       // Only navigate if the route view exists
       if (views[route]) {
@@ -475,7 +492,7 @@
         closeSidebarCompletely();
       }
       
-      collapseSidebar();
+      adjustContentAfterNavigation();
       showView('dashboard');
       renderDashboard();
     });
