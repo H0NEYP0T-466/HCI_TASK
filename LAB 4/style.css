@@ -1,0 +1,423 @@
+/* ===========================
+   LGU Timetable - Modern Design
+   HCI Project - Lab 4
+   =========================== */
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* LGU Brand Colors */
+    --primary-green: #2d7a3e;
+    --primary-green-dark: #1e5129;
+    --primary-green-light: #4a9d5f;
+    --accent-green: #8bc34a;
+    --white: #ffffff;
+    --light-gray: #f5f5f5;
+    --medium-gray: #e0e0e0;
+    --dark-gray: #424242;
+    --text-dark: #212121;
+    --text-light: #757575;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --shadow-hover: rgba(45, 122, 62, 0.2);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--white);
+    color: var(--text-dark);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Header Styles */
+header {
+    background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-green-dark) 100%);
+    color: var(--white);
+    padding: 2rem 2rem 1.5rem;
+    box-shadow: 0 4px 6px var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 4px solid var(--white);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.header-text {
+    flex: 1;
+}
+
+.header-text h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.5px;
+}
+
+.header-text p {
+    font-size: 1rem;
+    opacity: 0.95;
+    font-weight: 300;
+}
+
+/* Main Content */
+main {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+.timetable-container {
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 2px 12px var(--shadow);
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+}
+
+/* Table Header */
+thead {
+    background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-green-light) 100%);
+    color: var(--white);
+}
+
+thead th {
+    padding: 1rem 0.5rem;
+    font-weight: 600;
+    text-align: center;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+thead th:first-child {
+    padding-left: 1rem;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+thead th:last-child {
+    border-right: none;
+}
+
+/* Table Body */
+tbody tr {
+    transition: all 0.3s ease;
+    border-bottom: 1px solid var(--medium-gray);
+}
+
+tbody tr:nth-child(even) {
+    background-color: var(--light-gray);
+}
+
+tbody tr:hover {
+    background-color: #e8f5e9;
+    transform: scale(1.002);
+    box-shadow: 0 2px 8px var(--shadow-hover);
+}
+
+tbody td {
+    padding: 1.2rem 0.8rem;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0.85rem;
+    border-right: 1px solid var(--medium-gray);
+    transition: all 0.2s ease;
+}
+
+tbody td:first-child {
+    font-weight: 700;
+    color: var(--primary-green);
+    font-size: 1rem;
+    text-align: left;
+    padding-left: 1.5rem;
+    background: linear-gradient(90deg, #f1f8f4 0%, transparent 100%);
+}
+
+tbody td:last-child {
+    border-right: none;
+}
+
+/* Class Cells */
+.class-cell {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fdf9 100%);
+    border-left: 4px solid var(--primary-green);
+    padding: 0.8rem;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px var(--shadow);
+}
+
+.class-cell strong {
+    display: block;
+    color: var(--primary-green-dark);
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+    font-weight: 700;
+}
+
+.class-cell .room {
+    color: var(--text-light);
+    font-size: 0.8rem;
+    display: block;
+    margin: 0.2rem 0;
+}
+
+.class-cell .teacher {
+    color: var(--text-dark);
+    font-size: 0.82rem;
+    display: block;
+    margin: 0.2rem 0;
+}
+
+.class-cell .section {
+    color: var(--text-light);
+    font-size: 0.75rem;
+    font-style: italic;
+    display: block;
+    margin-top: 0.3rem;
+}
+
+/* Break Cells */
+.break-cell {
+    background: linear-gradient(135deg, #fff8e1 0%, #fffde7 100%);
+    color: var(--text-light);
+    font-style: italic;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Free Day Cells */
+.free-day {
+    background: linear-gradient(135deg, #e3f2fd 0%, #f1f8ff 100%);
+    color: var(--text-light);
+    font-style: italic;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Responsive Design - Tablet */
+@media screen and (max-width: 1024px) {
+    header {
+        padding: 1.5rem 1rem;
+    }
+
+    .header-container {
+        gap: 1rem;
+    }
+
+    .logo {
+        width: 60px;
+        height: 60px;
+    }
+
+    .header-text h1 {
+        font-size: 1.4rem;
+    }
+
+    .header-text p {
+        font-size: 0.9rem;
+    }
+
+    main {
+        padding: 0 1rem;
+        margin: 1.5rem auto;
+    }
+
+    thead th,
+    tbody td {
+        padding: 0.8rem 0.4rem;
+        font-size: 0.75rem;
+    }
+
+    .class-cell strong {
+        font-size: 0.8rem;
+    }
+
+    .class-cell .room,
+    .class-cell .teacher {
+        font-size: 0.7rem;
+    }
+
+    .class-cell .section {
+        font-size: 0.65rem;
+    }
+}
+
+/* Responsive Design - Mobile */
+@media screen and (max-width: 768px) {
+    header {
+        padding: 1rem;
+    }
+
+    .header-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.8rem;
+    }
+
+    .logo {
+        width: 70px;
+        height: 70px;
+    }
+
+    .header-text h1 {
+        font-size: 1.3rem;
+    }
+
+    .header-text p {
+        font-size: 0.85rem;
+    }
+
+    main {
+        margin: 1rem auto;
+        padding: 0 0.5rem;
+    }
+
+    .timetable-container {
+        border-radius: 8px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+        min-width: 800px;
+    }
+
+    thead th {
+        padding: 0.7rem 0.3rem;
+        font-size: 0.7rem;
+    }
+
+    tbody td {
+        padding: 0.7rem 0.3rem;
+        font-size: 0.7rem;
+    }
+
+    tbody td:first-child {
+        padding-left: 0.8rem;
+        font-size: 0.85rem;
+    }
+
+    .class-cell {
+        padding: 0.6rem;
+    }
+
+    .class-cell strong {
+        font-size: 0.75rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .class-cell .room,
+    .class-cell .teacher {
+        font-size: 0.65rem;
+    }
+
+    .class-cell .section {
+        font-size: 0.6rem;
+    }
+}
+
+/* Mobile - Very Small Screens */
+@media screen and (max-width: 480px) {
+    .header-text h1 {
+        font-size: 1.1rem;
+    }
+
+    .header-text p {
+        font-size: 0.75rem;
+    }
+
+    .logo {
+        width: 60px;
+        height: 60px;
+    }
+
+    table {
+        min-width: 700px;
+    }
+
+    thead th,
+    tbody td {
+        font-size: 0.65rem;
+        padding: 0.5rem 0.2rem;
+    }
+
+    .class-cell strong {
+        font-size: 0.7rem;
+    }
+
+    .class-cell .room,
+    .class-cell .teacher,
+    .class-cell .section {
+        font-size: 0.6rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.timetable-container {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Print Styles */
+@media print {
+    header {
+        position: static;
+        box-shadow: none;
+    }
+
+    .timetable-container {
+        box-shadow: none;
+    }
+
+    tbody tr:hover {
+        background-color: transparent;
+        transform: none;
+        box-shadow: none;
+    }
+
+    .class-cell {
+        box-shadow: none;
+    }
+}

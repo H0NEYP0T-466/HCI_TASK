@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student Portal</title>
+  <script>
+    // Redirect to the new dashboard page
+    const isAuth = localStorage.getItem('isAuthenticated') === 'true';
+    if (isAuth) {
+      window.location.href = 'pages/dashboard.html';
+    } else {
+      window.location.href = 'pages/login.html';
+    }
+  </script>
+</head>
+<body>
+  <p>Redirecting...</p>
+</body>
+</html>

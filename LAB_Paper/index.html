@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Registration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Course Registration Form</h1>
+        <form id="registrationForm">
+            <div class="form-group">
+                <label for="studentName">Full Name <span class="required">*</span></label>
+                <input type="text" id="studentName" name="studentName" placeholder="Enter your full name">
+                <div class="error-message" id="studentNameError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="studentEmail">Email Address <span class="required">*</span></label>
+                <input type="email" id="studentEmail" name="studentEmail" placeholder="Enter your email">
+                <div class="error-message" id="studentEmailError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="studentId">Student ID <span class="required">*</span></label>
+                <input type="text" id="studentId" name="studentId" placeholder="Enter your student ID">
+                <div class="error-message" id="studentIdError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="program">Program <span class="required">*</span></label>
+                <select id="program" name="program">
+                    <option value="">Select your program</option>
+                    <option value="CS">Computer Science</option>
+                    <option value="SE">Software Engineering</option>
+                    <option value="IT">Information Technology</option>
+                    <option value="DS">Data Science</option>
+                    <option value="CE">Computer Engineering</option>
+                </select>
+                <div class="error-message" id="programError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="semester">Semester <span class="required">*</span></label>
+                <select id="semester" name="semester">
+                    <option value="">Select semester</option>
+                    <option value="1">Semester 1</option>
+                    <option value="2">Semester 2</option>
+                    <option value="3">Semester 3</option>
+                    <option value="4">Semester 4</option>
+                    <option value="5">Semester 5</option>
+                    <option value="6">Semester 6</option>
+                    <option value="7">Semester 7</option>
+                    <option value="8">Semester 8</option>
+                </select>
+                <div class="error-message" id="semesterError"></div>
+            </div>
+
+            <div class="form-group">
+                <label>Select Courses <span class="required">*</span></label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="course1" name="courses" value="Data Structures">
+                        <label for="course1">Data Structures</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="course2" name="courses" value="Database Systems">
+                        <label for="course2">Database Systems</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="course3" name="courses" value="Web Development">
+                        <label for="course3">Web Development</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="course4" name="courses" value="Machine Learning">
+                        <label for="course4">Machine Learning</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="course5" name="courses" value="Operating Systems">
+                        <label for="course5">Operating Systems</label>
+                    </div>
+                </div>
+                <div class="error-message" id="coursesError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="comments">Additional Comments</label>
+                <textarea id="comments" name="comments" rows="4" placeholder="Any special requests or comments (optional)"></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Register Courses</button>
+        </form>
+    </div>
+
+    <div class="confirmation-modal" id="confirmationModal">
+        <div class="modal-content">
+            <div class="success-icon">✓</div>
+            <h2>Registration Successful!</h2>
+            <p>Your course registration has been submitted successfully. You will receive a confirmation email shortly.</p>
+            <button class="btn-close" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('registrationForm');
+        const modal = document.getElementById('confirmationModal');
+        function validateField(fieldId, errorId, validationFn, errorMessage) {
+            const field = document.getElementById(fieldId);
+            const errorDiv = document.getElementById(errorId);
+            
+            if (!validationFn(field)) {
+                field.classList.add('invalid');
+                errorDiv.textContent = errorMessage;
+                errorDiv.classList.add('show');
+                return false;
+            } else {
+                field.classList.remove('invalid');
+                errorDiv.classList.remove('show');
+                return true;
+            }
+        }
+
+        function isNotEmpty(field) {
+            return field.value.trim() !== '';
+        }
+
+        function isValidEmail(field) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return field.value.trim() !== '' && emailRegex.test(field.value.trim());
+        }
+
+        function isValidStudentId(field) {
+            return field.value.trim() !== '' && field.value.trim().length >= 3;
+        }
+
+        function validateCourses() {
+            const checkboxes = document.querySelectorAll('input[name="courses"]:checked');
+            const errorDiv = document.getElementById('coursesError');
+            
+            if (checkboxes.length === 0) {
+                errorDiv.textContent = 'Please select at least one course';
+                errorDiv.classList.add('show');
+                return false;
+            } else {
+                errorDiv.classList.remove('show');
+                return true;
+            }
+        }
+        document.getElementById('studentName').addEventListener('blur', function() {
+            validateField('studentName', 'studentNameError', isNotEmpty, 'Full name is required');
+        });
+
+        document.getElementById('studentEmail').addEventListener('blur', function() {
+            validateField('studentEmail', 'studentEmailError', isValidEmail, 'Please enter a valid email address');
+        });
+
+        document.getElementById('studentId').addEventListener('blur', function() {
+            validateField('studentId', 'studentIdError', isValidStudentId, 'Student ID is required (minimum 3 characters)');
+        });
+
+        document.getElementById('program').addEventListener('change', function() {
+            validateField('program', 'programError', isNotEmpty, 'Please select your program');
+        });
+
+        document.getElementById('semester').addEventListener('change', function() {
+            validateField('semester', 'semesterError', isNotEmpty, 'Please select a semester');
+        });
+
+        const inputs = document.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('input', function() {
+                this.classList.remove('invalid');
+            });
+        });
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const isNameValid = validateField('studentName', 'studentNameError', isNotEmpty, 'Full name is required');
+            const isEmailValid = validateField('studentEmail', 'studentEmailError', isValidEmail, 'Please enter a valid email address');
+            const isIdValid = validateField('studentId', 'studentIdError', isValidStudentId, 'Student ID is required (minimum 3 characters)');
+            const isProgramValid = validateField('program', 'programError', isNotEmpty, 'Please select your program');
+            const isSemesterValid = validateField('semester', 'semesterError', isNotEmpty, 'Please select a semester');
+            const areCoursesValid = validateCourses();
+
+            if (isNameValid && isEmailValid && isIdValid && isProgramValid && isSemesterValid && areCoursesValid) {
+                modal.classList.add('show');
+
+                form.reset();
+
+                document.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
+                document.querySelectorAll('.error-message').forEach(el => el.classList.remove('show'));
+            } else {
+                const firstError = document.querySelector('.invalid');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    firstError.focus();
+                }
+            }
+        });
+
+        function closeModal() {
+            modal.classList.remove('show');
+        }
+
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

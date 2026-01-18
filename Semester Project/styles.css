@@ -1,0 +1,61 @@
+:root {
+  --brand-primary: #0d6efd;
+  --soft-primary: rgba(13, 110, 253, 0.1);
+  --soft-success: rgba(25, 135, 84, 0.1);
+  --soft-warning: rgba(255, 193, 7, 0.25); /* stronger yellow for Outstanding */
+  --soft-dark: rgba(33, 37, 41, 0.1);
+}
+
+body { background-color: #f6f8fb; }
+
+/* LGU Logo */
+.lgu-logo { height: 38px; width: auto; object-fit: contain; }
+
+/* Portal Title */
+.portal-title { font-weight: 600; line-height: 1.2; }
+.portal-subtitle { font-size: 0.85rem; color: #6c757d; }
+
+/* Sidebar */
+.sidebar { width: 260px; min-height: calc(100vh - 56px); transition: width 0.2s ease; }
+.sidebar.collapsed { width: 72px; }
+.sidebar .list-group-item { border: none; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 8px; }
+.sidebar .list-group-item.active { background-color: var(--soft-primary); color: var(--brand-primary); font-weight: 600; border-right: 3px solid var(--brand-primary); }
+.sidebar .sidebar-header { height: 56px; }
+.sidebar.collapsed .sidebar-header .fw-semibold { display: none; }
+.sidebar.collapsed .list-group-item { justify-content: center; }
+.sidebar.collapsed .list-group-item span { display: none; }
+
+/* Dashboard cards */
+.dash-card .dash-icon {
+  width: 42px; height: 42px; border-radius: 10px; display: grid; place-items: center; color: #0d6efd; font-size: 20px;
+}
+.bg-soft-primary { background: var(--soft-primary); }
+.bg-soft-success { background: var(--soft-success); }
+.bg-soft-warning { background: var(--soft-warning); } /* use yellow for Outstanding */
+.bg-soft-dark { background: var(--soft-dark); }
+
+/* Force Outstanding icon to be yellow and readable */
+#outstandingFee { color: #000; }
+
+/* Global loader */
+.global-loader {
+  position: fixed; bottom: 16px; right: 16px; z-index: 1056; background: #fff; border: 1px solid #e9ecef;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1); padding: 8px 14px; border-radius: 12px; display: flex; align-items: center;
+}
+
+/* Printable Challan */
+.print-layout { font-family: Arial, Helvetica, sans-serif; color: #000; }
+.challan-header { display: flex; align-items: center; gap: 8px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-bottom: 8px; }
+.challan-header .title-block { line-height: 1.1; }
+.challan-header .title-block .title { font-weight: 700; }
+.challan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.challan-copy { border: 1px solid #333; padding: 12px; }
+.copy-title { font-weight: 700; color: #c00; text-align: center; margin-top: 8px; }
+.challan-meta { font-size: 0.92rem; margin-bottom: 8px; }
+.challan-table { width: 100%; border-collapse: collapse; margin-top: 6px; }
+.challan-table th, .challan-table td { border: 1px solid #333; padding: 6px 8px; font-size: 0.92rem; }
+.challan-total { font-weight: 700; margin-top: 8px; }
+.challan-footer { font-size: 0.9rem; margin-top: 10px; color: #c00; text-align: center; }
+
+@media (max-width: 992px) { .challan-grid { grid-template-columns: 1fr; } }
+.table td, .table th { vertical-align: middle; }

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Neon Feedback — High Contrast UI</title>
+    <meta name="description" content="A modern, high-contrast feedback form with accessible validation and a responsive, toggleable navigation menu." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+
+    <header class="site-header">
+      <nav class="nav container" aria-label="Primary">
+        <a class="nav__brand" href="#home" aria-label="Neon Feedback home">
+              <button
+          class="nav__toggle"
+          aria-label="Toggle navigation"
+          aria-controls="primary-menu"
+          aria-expanded="false"
+        >
+          <span class="bar" aria-hidden="true"></span>
+          <span class="bar" aria-hidden="true"></span>
+          <span class="bar" aria-hidden="true"></span>
+        </button>
+          <span class="brand__dot" aria-hidden="true"></span>
+          NeonFeedback
+        </a>
+
+        <ul id="primary-menu" class="nav__menu">
+          <li><a href="#home" class="nav__link">Home</a></li>
+          <li><a href="#features" class="nav__link">Features</a></li>
+          <li><a href="#about" class="nav__link">About</a></li>
+          <li><a href="#contact" class="nav__link">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+
+    <main id="home" class="container">
+      <section class="stack-lg">
+        <header class="hero">
+          <h1 class="hero__title">We value your feedback</h1>
+          <p class="hero__subtitle">
+            Tell us what’s working and what isn’t. Your insight helps us craft better experiences.
+          </p>
+        </header>
+        <article class="card" aria-labelledby="feedback-title">
+          <h2 id="feedback-title" class="card__title">Feedback Form</h2>
+
+
+          <div id="formStatus" class="form__status" role="alert" aria-live="assertive" hidden>
+    
+          </div>
+
+          <form id="feedbackForm" novalidate>
+
+            <div class="field" data-field="name">
+              <input
+                class="field__control"
+                type="text"
+                id="name"
+                name="name"
+                placeholder=" "
+                autocomplete="name"
+                aria-required="true"
+                aria-describedby="error-name"
+              />
+              <label class="field__label" for="name">Name</label>
+              <p class="field__error" id="error-name" aria-live="polite"></p>
+            </div>
+
+
+            <div class="field" data-field="email">
+              <input
+                class="field__control"
+                type="email"
+                id="email"
+                name="email"
+                placeholder=" "
+                autocomplete="email"
+                aria-required="true"
+                aria-describedby="error-email"
+              />
+              <label class="field__label" for="email">Email</label>
+              <p class="field__error" id="error-email" aria-live="polite"></p>
+            </div>
+
+
+            <div class="field" data-field="comments">
+              <textarea
+                class="field__control field__control--textarea"
+                id="comments"
+                name="comments"
+                placeholder=" "
+                rows="6"
+                aria-required="true"
+                aria-describedby="error-comments"
+              ></textarea>
+              <label class="field__label" for="comments">Comments</label>
+              <p class="field__error" id="error-comments" aria-live="polite"></p>
+            </div>
+
+
+            <div class="form__actions">
+              <button type="submit" class="btn btn--neon" aria-label="Submit feedback">
+                <span class="btn__inner">Submit Feedback</span>
+              </button>
+            </div>
+          </form>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer container" id="contact">
+      <p>
+        Built with care  <a href="https://fonts.google.com/specimen/Space+Grotesk" target="_blank" rel="noopener">~honeypot</a>.
+      </p>
+    </footer>
+
+
+    <script src="script.js"></script>
+    <noscript>
+      <p class="no-js">JavaScript is required for form validation and menu toggling.</p>
+    </noscript>
+  </body>
+</html>
