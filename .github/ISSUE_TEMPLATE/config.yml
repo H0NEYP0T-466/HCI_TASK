@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 General Questions & Discussions
+    url: https://github.com/H0NEYP0T-466/HciLab-workbench/discussions
+    about: Ask questions, share ideas, or discuss topics related to the project
+  - name: 🛡️ Security Vulnerabilities
+    url: https://github.com/H0NEYP0T-466/HciLab-workbench/security
+    about: Report security vulnerabilities privately through GitHub Security Advisories
+  - name: 📖 Documentation & Learning Resources
+    url: https://github.com/H0NEYP0T-466/HciLab-workbench#readme
+    about: Check the README and project documentation for setup guides and usage examples
