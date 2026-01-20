@@ -1,0 +1,171 @@
+name: "🐛 Bug Report"
+description: "Report a reproducible problem or unexpected behavior"
+labels: ["bug"]
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this bug! Please fill out the information below to help us resolve the issue quickly.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: "Bug Summary"
+      description: "A clear and concise description of what the bug is."
+      placeholder: "Describe the bug in one or two sentences..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: "Steps to Reproduce"
+      description: "Tell us how to reproduce this bug. Be as specific as possible."
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. Scroll down to '...'
+        4. See error
+      value: |
+        1. 
+        2. 
+        3. 
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: "Expected Behavior"
+      description: "What did you expect to happen?"
+      placeholder: "I expected..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: "Actual Behavior"
+      description: "What actually happened?"
+      placeholder: "Instead, what happened was..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: "Browser"
+      description: "Which browser(s) are you experiencing this issue on?"
+      multiple: true
+      options:
+        - Chrome
+        - Firefox
+        - Safari
+        - Edge
+        - Other (specify in additional context)
+    validations:
+      required: true
+
+  - type: input
+    id: browser-version
+    attributes:
+      label: "Browser Version"
+      description: "What version of the browser are you using?"
+      placeholder: "e.g., Chrome 120.0.6099.109"
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: "Operating System"
+      description: "What operating system are you using?"
+      options:
+        - Windows
+        - macOS
+        - Linux
+        - iOS
+        - Android
+        - Other (specify in additional context)
+    validations:
+      required: true
+
+  - type: input
+    id: os-version
+    attributes:
+      label: "OS Version"
+      description: "What version of the operating system?"
+      placeholder: "e.g., Windows 11, macOS 14.0, Ubuntu 22.04"
+
+  - type: input
+    id: screen-size
+    attributes:
+      label: "Screen Size / Device"
+      description: "What screen size or device are you using?"
+      placeholder: "e.g., 1920x1080 desktop, iPhone 14, iPad Pro"
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: "Console Logs / Error Messages"
+      description: "Please copy and paste any relevant console logs or error messages. This will be automatically formatted."
+      render: shell
+      placeholder: "Paste console output here..."
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: "Screenshots"
+      description: "If applicable, add screenshots to help explain your problem. You can drag and drop images here."
+      placeholder: "Drag and drop screenshots here..."
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: "Severity"
+      description: "How severe is this bug?"
+      options:
+        - Critical - Application is unusable
+        - High - Major functionality is broken
+        - Medium - Feature doesn't work as expected
+        - Low - Minor issue or cosmetic problem
+    validations:
+      required: true
+
+  - type: dropdown
+    id: project
+    attributes:
+      label: "Which Project/Lab?"
+      description: "Which part of the repository is affected?"
+      options:
+        - Semester Project
+        - LAB 1
+        - LAB 2
+        - LAB 4
+        - LAB 5
+        - LAB 6
+        - LAB 7
+        - LAB_Paper
+        - OEL
+        - Multiple/Other (specify in additional context)
+
+  - type: textarea
+    id: context
+    attributes:
+      label: "Additional Context"
+      description: "Add any other context about the problem here. This could include workarounds you've tried, related issues, or suggestions for how to fix it."
+      placeholder: "Any additional information..."
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "Checklist"
+      description: "Please confirm the following:"
+      options:
+        - label: "I have searched for existing issues to avoid creating duplicates"
+          required: true
+        - label: "I have tested this in the latest version"
+          required: true
+        - label: "I have provided all the required information above"
+          required: true
+        - label: "I have included screenshots/logs where applicable"
+          required: false

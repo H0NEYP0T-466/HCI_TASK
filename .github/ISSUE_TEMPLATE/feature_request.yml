@@ -1,0 +1,186 @@
+name: "✨ Feature Request"
+description: "Propose a new feature or enhancement"
+labels: ["enhancement"]
+title: "[Feature]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a new feature! Please provide as much detail as possible to help us understand your proposal.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: "Problem Statement"
+      description: "What problem are you trying to solve? Is your feature request related to a problem?"
+      placeholder: "I'm always frustrated when... / I need to be able to..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: "Proposed Solution"
+      description: "Describe the solution you'd like. How would this feature work?"
+      placeholder: "I would like to have... / The feature should..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: "Alternatives Considered"
+      description: "Have you considered any alternative solutions or features? What are they?"
+      placeholder: "Another approach could be... / I also considered..."
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: "Scope & Requirements"
+      description: "What should be included in this feature? What should NOT be included?"
+      placeholder: |
+        **In Scope:**
+        - Feature A
+        - Feature B
+        
+        **Out of Scope:**
+        - Feature X
+        - Feature Y
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: "Priority"
+      description: "How important is this feature to you?"
+      options:
+        - Critical - Blocking my work
+        - High - Would significantly improve usability
+        - Medium - Nice to have
+        - Low - Minor improvement
+    validations:
+      required: true
+
+  - type: dropdown
+    id: feature-type
+    attributes:
+      label: "Feature Type"
+      description: "What type of feature is this?"
+      multiple: true
+      options:
+        - New Lab Assignment
+        - UI/UX Enhancement
+        - Accessibility Improvement
+        - Performance Optimization
+        - Documentation
+        - Developer Experience
+        - New HCI Concept Implementation
+        - Other (specify in additional context)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: project
+    attributes:
+      label: "Which Project/Lab?"
+      description: "Which part of the repository would this feature affect?"
+      options:
+        - Semester Project
+        - LAB 1
+        - LAB 2
+        - LAB 4
+        - LAB 5
+        - LAB 6
+        - LAB 7
+        - LAB_Paper
+        - OEL
+        - Repository-wide
+        - New Project/Lab
+        - Multiple/Other (specify in additional context)
+
+  - type: textarea
+    id: benefits
+    attributes:
+      label: "Benefits & Impact"
+      description: "How would this feature benefit the project and its users?"
+      placeholder: |
+        - Improves learning experience by...
+        - Makes it easier to...
+        - Follows HCI best practice for...
+
+  - type: textarea
+    id: risks
+    attributes:
+      label: "Potential Risks or Concerns"
+      description: "Are there any risks, challenges, or concerns with implementing this feature?"
+      placeholder: "This might affect... / We need to consider..."
+
+  - type: textarea
+    id: mockups
+    attributes:
+      label: "Mockups or Examples"
+      description: "Do you have any mockups, wireframes, or examples from other projects? You can drag and drop images here."
+      placeholder: "Drag and drop images or provide links to examples..."
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: "Implementation Ideas"
+      description: "Do you have any ideas about how this could be implemented? (Optional - leave blank if unsure)"
+      placeholder: |
+        - Could use library X for...
+        - The HTML structure could be...
+        - CSS could include...
+
+  - type: dropdown
+    id: hci-principle
+    attributes:
+      label: "Related HCI Principle"
+      description: "Which HCI principle(s) does this feature relate to?"
+      multiple: true
+      options:
+        - Visibility of System Status
+        - Match Between System and Real World
+        - User Control and Freedom
+        - Consistency and Standards
+        - Error Prevention
+        - Recognition Rather Than Recall
+        - Flexibility and Efficiency of Use
+        - Aesthetic and Minimalist Design
+        - Help Users Recognize, Diagnose, and Recover from Errors
+        - Help and Documentation
+        - Accessibility (WCAG)
+        - Responsive Design
+        - Other/Multiple
+
+  - type: textarea
+    id: context
+    attributes:
+      label: "Additional Context"
+      description: "Add any other context, background information, or references about the feature request here."
+      placeholder: "Related resources, research, or additional thoughts..."
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: "Contribution"
+      description: "Would you be willing to help with this feature?"
+      options:
+        - label: "I would be willing to submit a PR for this feature"
+          required: false
+        - label: "I can help with testing this feature"
+          required: false
+        - label: "I can provide design/mockups for this feature"
+          required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "Checklist"
+      description: "Please confirm the following:"
+      options:
+        - label: "I have searched for existing feature requests to avoid duplicates"
+          required: true
+        - label: "This feature aligns with the project's educational goals"
+          required: true
+        - label: "I have provided sufficient detail about the feature"
+          required: true
